@@ -18,4 +18,4 @@ NGAZ ($NGAZ) is a community-driven meme token on the Base network designed to bl
 ## Links
 - [Website](https://www.ngaz.io)
 - [BaseScan](https://basescan.org/token/0x4E8970229Cd7dbDAa3705F1a7ef17B1C66A2C27F)
-- [Twitter](https://x.com/ngazcoin)
+- [Twitter](https://x.com/NoGimicksAllZap)
