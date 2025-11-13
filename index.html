@@ -1420,5 +1420,17 @@
 <script></script>
 <script></script>
 <script></script>
+<script>
+  // Auto resize for embedded iframe
+  function sendHeight() {
+    const height = document.body.scrollHeight;
+    parent.postMessage({ ngazHeight: height }, "*");
+  }
+
+  window.onload = sendHeight;
+  window.onresize = sendHeight;
+  setInterval(sendHeight, 500);
+</script>
+  
 </body>
 </html>
