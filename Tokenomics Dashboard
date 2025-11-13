@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NGAZ Token Allocation & Vesting Dashboard - Flipside AI</title>
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="NGAZ Token Allocation & Vesting Dashboard - Flipside AI">
+  <meta property="og:description" content="View this report created with Flipside AI">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://imagedelivery.net/zDVNm7okmEMyt4-PACiTzA/og-images-chat-og-h/public">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ARTIFACT_TITLE}} - Flipside AI">
+  <meta name="twitter:description" content="View this report created with Flipside AI">
+  <meta name="twitter:image" content="https://imagedelivery.net/zDVNm7okmEMyt4-PACiTzA/og-images-chat-og-h/public">
+  <!-- RudderStack SDK via Proxy -->
+  <script src="https://rsp-production.flipsidecrypto.workers.dev/dataPlane" async></script>
+  <script>
+      // Initialize RudderStack after SDK loads
+      window.addEventListener('load', function() {
+          if (window.rudderanalytics) {
+              const writeKey = "2z9KKbF28QdmL4LkSpJ4JvDDZrq";
+              const url = "https://rsp-production.flipsidecrypto.workers.dev";
+
+              // Load with proxy config options
+              rudderanalytics.load(writeKey, url, {
+                  configUrl: url,
+                  destSDKBaseURL: url + "/integrations",
+                  pluginsSDKBaseURL: url + "/plugins",
+                  useBeacon: false,
+                  cdn: url
+              });
+
+              rudderanalytics.page("Artifact View", {
+                  title: "NGAZ Token Allocation & Vesting Dashboard",
+                  artifact: true
+              });
+
+              // Add manual link tracking for all links
+              document.addEventListener('click', function(event) {
+                  const target = event.target.closest('a');
+                  if (target && target.href) {
+                      rudderanalytics.track("artifact_link_clicked", {
+                          url: target.href,
+                          text: target.textContent.trim(),
+                          title: "NGAZ Token Allocation & Vesting Dashboard",
+                          artifact: true
+                      });
+                  }
+              });
+          }
+      });
+  </script>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp,container-queries"></script>
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/highcharts-more.js"></script>
+  <script src="https://code.highcharts.com/modules/heatmap.js"></script>
+  <script src="https://code.highcharts.com/modules/treemap.js"></script>
+  <script src="https://code.highcharts.com/modules/treegraph.js"></script>
+  <script src="https://code.highcharts.com/modules/solid-gauge.js"></script>
+  <script src="https://code.highcharts.com/modules/tilemap.js"></script>
+  <script src="https://code.highcharts.com/modules/timeline.js"></script>
+  <script src="https://code.highcharts.com/modules/xrange.js"></script>
+  <script src="https://code.highcharts.com/modules/histogram-bellcurve.js"></script>
+  <script src="https://code.highcharts.com/modules/sankey.js"></script>
+  <script src="https://code.highcharts.com/modules/pareto.js"></script>
+  <script src="https://code.highcharts.com/modules/networkgraph.js"></script>
+  <script src="https://code.highcharts.com/modules/wordcloud.js"></script>
+  <script src="https://code.highcharts.com/modules/venn.js"></script>
+  <script src="https://code.highcharts.com/modules/vector.js"></script>
+  <script>
+    // Enforce light theme for all Highcharts
+    Highcharts.setOptions({
+      time: {
+        useUTC: true
+      },
+      chart: {
+        backgroundColor: '#FFFFFF',
+        style: {
+          fontFamily: 'system-ui, -apple-system, sans-serif'
+        }
+      },
+      title: {
+        style: {
+          color: '#000000',
+          fontWeight: '600',
+          fontSize: '16px'
+        }
+      },
+      subtitle: {
+        style: {
+          color: '#4B5563',
+          fontSize: '14px'
+        }
+      },
+      legend: {
+        itemStyle: {
+          color: '#000000',
+          fontWeight: '500',
+          fontSize: '13px'
+        },
+        itemHoverStyle: {
+          color: '#000000'
+        }
+      },
+      xAxis: {
+        labels: {
+          style: {
+            color: '#4B5563',
+            fontSize: '12px'
+          }
+        },
+        title: {
+          style: {
+            color: '#111827',
+            fontSize: '13px'
+          }
+        }
+      },
+      yAxis: {
+        labels: {
+          style: {
+            color: '#4B5563',
+            fontSize: '12px'
+          }
+        },
+        title: {
+          style: {
+            color: '#111827',
+            fontSize: '13px'
+          }
+        }
+      }
+    });
+  </script>
+  <style>
+    :root {
+      /* Color palette CSS variables */
+      --color-primary: #4F46E5;
+      --color-primary-light: #818CF8;
+      --color-primary-dark: #3730A3;
+      --color-secondary: #8B5CF6;
+      --color-accent: #06B6D4;
+      --color-background: #F9FAFB;
+      --color-card-bg: #FFFFFF;
+      --color-text-primary: #111827;
+      --color-text-secondary: #4B5563;
+      --color-text-muted: #9CA3AF;
+      --color-border: #E5E7EB;
+      --color-chart-1: #4F46E5;
+      --color-chart-2: #8B5CF6;
+      --color-chart-3: #06B6D4;
+      --color-chart-4: #10B981;
+      --color-chart-5: #F59E0B;
+      --color-chart-6: #EF4444;
+      --color-chart-7: #EC4899;
+      --color-chart-8: #6366F1;
+    }
+
+    body {
+      background-color: var(--color-background);
+      color: var(--color-text-primary);
+    }
+
+    /* SQL Modal Styles */
+    #sql-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .sql-modal-content {
+      background-color: white;
+      border-radius: 8px;
+      max-width: 800px;
+      width: 100%;
+      max-height: 80vh;
+      overflow-y: auto;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .sql-modal-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--color-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .sql-modal-body {
+      padding: 24px;
+    }
+
+    .sql-modal-footer {
+      padding: 16px 24px;
+      border-top: 1px solid var(--color-border);
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+    }
+
+    .view-sql-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background-color: rgba(255, 255, 255, 0.9);
+      border: 1px solid var(--color-border);
+      border-radius: 4px;
+      padding: 6px 10px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--color-text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.2s;
+      z-index: 10;
+    }
+
+    .view-sql-btn:hover {
+      background-color: white;
+      color: var(--color-primary);
+      border-color: var(--color-primary);
+    }
+
+    .modal-btn {
+      padding: 8px 16px;
+      border-radius: 4px;
+      border: 1px solid var(--color-border);
+      background-color: white;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+
+    .modal-btn-primary {
+      background-color: var(--color-primary);
+      color: white;
+      border-color: var(--color-primary);
+    }
+
+    .modal-btn:hover {
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+  <script>
+  // Initialize queries Map
+  const queries = new Map();
+  queries.set('eb433f31-98b2-45da-8faa-1cf71b05d3b0', [{"WALLET_ADDRESS":"0xca1d48b730a495061ace5f5cdca7038d631ece60","CURRENT_BALANCE":2680000001,"WALLET_LABEL":"Treasury Multisig"},{"WALLET_ADDRESS":"0x7fa113fe01d7bb109ae60ef6bba0de9b24c4005a","CURRENT_BALANCE":1117689571.9447,"WALLET_LABEL":"Airdrop Fund"},{"WALLET_ADDRESS":"0x1202f1413b0890a9e1ecd78239f86f92a91f81a8","CURRENT_BALANCE":705298841.438086,"WALLET_LABEL":"Marketing Multisig"}]);
+  queries.set('158cb86c-5b28-4a94-9ceb-c19841f3bd93', [{"WALLET_ADDRESS":"0xca1d48b730a495061ace5f5cdca7038d631ece60","CURRENT_BALANCE":2680000001,"PCT_OF_SUPPLY":null,"WALLET_LABEL":"Treasury Multisig"},{"WALLET_ADDRESS":"0x7fa113fe01d7bb109ae60ef6bba0de9b24c4005a","CURRENT_BALANCE":1117689571.9447,"PCT_OF_SUPPLY":null,"WALLET_LABEL":"Airdrop Fund"},{"WALLET_ADDRESS":"0x2cde9919e81b20b4b33dd562a48a84b54c48f00c","CURRENT_BALANCE":720000000,"PCT_OF_SUPPLY":null,"WALLET_LABEL":"Other"},{"WALLET_ADDRESS":"0x1202f1413b0890a9e1ecd78239f86f92a91f81a8","CURRENT_BALANCE":705298841.438086,"PCT_OF_SUPPLY":null,"WALLET_LABEL":"Marketing Multisig"},{"WALLET_ADDRESS":"0xe261b366f231b12fcb58d6bbd71e57faee82431d","CURRENT_BALANCE":620000000,"PCT_OF_SUPPLY":null,"WALLET_LABEL":"Other"},{"WALLET_ADDRESS":"0x06b617dadc25d6e82c2f6ab16b125797a7648ba1","CURRENT_BALANCE":100000000,"PCT_OF_SUPPLY":null,"WALLET_LABEL":"Other"},{"WALLET_ADDRESS":"0x56bebf33e70fe0ab61573910bab9b9e14eaaddd3","CURRENT_BALANCE":75000000,"PCT_OF_SUPPLY":null,"WALLET_LABEL":"Other"},{"WALLET_ADDRESS":"0x91ce157501dd92cac6c22f3cae331d56b3ffe827","CURRENT_BALANCE":50000000,"PCT_OF_SUPPLY":null,"WALLET_LABEL":"Other"},{"WALLET_ADDRESS":"0xba9ba21d93d06ec0a18a58b695545bc74783144b","CURRENT_BALANCE":30000000,"PCT_OF_SUPPLY":null,"WALLET_LABEL":"Other"},{"WALLET_ADDRESS":"0x582ef77aad73c7b800c46e626c373f095932612a","CURRENT_BALANCE":25000000,"PCT_OF_SUPPLY":null,"WALLET_LABEL":"Other"},{"WALLET_ADDRESS":"0xfd794e3739361e7bc7a0e1f68f0b3ebff562c4f2","CURRENT_BALANCE":20000000,"PCT_OF_SUPPLY":null,"WALLET_LABEL":"Other"},{"WALLET_ADDRESS":"0x519295c27b31dd87e3747525530ef97887cbf560","CURRENT_BALANCE":15000000,"PCT_OF_SUPPLY":null,"WALLET_LABEL":"Other"},{"WALLET_ADDRESS":"0xd046ef93ed2c66700128ed38ef8ee416bdd223b3","CURRENT_BALANCE":10000000,"PCT_OF_SUPPLY":null,"WALLET_LABEL":"Other"},{"WALLET_ADDRESS":"0xc1d3174d04e813832eb36e58c287150bcec889ca","CURRENT_BALANCE":10000000,"PCT_OF_SUPPLY":null,"WALLET_LABEL":"Other"},{"WALLET_ADDRESS":"0x2c39a56946c164091ee797665e1b3478975a8bf6","CURRENT_BALANCE":10000000,"PCT_OF_SUPPLY":null,"WALLET_LABEL":"Other"},{"WALLET_ADDRESS":"0x701a2c2ea4c1d4a7639b48115cfe44b69e74510d","CURRENT_BALANCE":10000000,"PCT_OF_SUPPLY":null,"WALLET_LABEL":"Other"},{"WALLET_ADDRESS":"0x26aac54a853ce00590b8eeaf15d1e0b50472fd2f","CURRENT_BALANCE":5000000,"PCT_OF_SUPPLY":null,"WALLET_LABEL":"Other"},{"WALLET_ADDRESS":"0x498581ff718922c3f8e6a244956af099b2652b2b","CURRENT_BALANCE":59.002287224,"PCT_OF_SUPPLY":null,"WALLET_LABEL":"Other"}]);
+  queries.set('dd8c2b9e-23cd-4d80-82d3-0bdad34a8de1', [{"TOTAL_MINTED":null,"TOTAL_BURNED":0,"CIRCULATING_SUPPLY":null,"TOTAL_MINT_EVENTS":1,"FIRST_MINT_DATE":"2025-10-31T16:33:03.000Z","LAST_MINT_DATE":"2025-10-31T16:33:03.000Z"}]);
+  queries.set('308b7bb4-581d-4654-adec-b25e7e8c34df', [{"TO_ADDRESS":"0xca1d48b730a495061ace5f5cdca7038d631ece60","TRANSFER_COUNT":4,"TOTAL_RECEIVED":3400000001},{"TO_ADDRESS":"0xc6e3d80c27fb83149b7627cb6ab7dd4524ed15de","TRANSFER_COUNT":4,"TOTAL_RECEIVED":2785000000},{"TO_ADDRESS":"0x7fa113fe01d7bb109ae60ef6bba0de9b24c4005a","TRANSFER_COUNT":3,"TOTAL_RECEIVED":1117689571.9447},{"TO_ADDRESS":"0xe309de51001a2dca3045b5da98cee6f245f78810","TRANSFER_COUNT":2,"TOTAL_RECEIVED":900000001},{"TO_ADDRESS":"0x2cde9919e81b20b4b33dd562a48a84b54c48f00c","TRANSFER_COUNT":1,"TOTAL_RECEIVED":720000000},{"TO_ADDRESS":"0x3466eb008edd8d5052446293d1a7d212cb65c646","TRANSFER_COUNT":1,"TOTAL_RECEIVED":720000000},{"TO_ADDRESS":"0x1202f1413b0890a9e1ecd78239f86f92a91f81a8","TRANSFER_COUNT":4,"TOTAL_RECEIVED":705298841.438086},{"TO_ADDRESS":"0x8882549b29dfed283738918d90b5f6e2ab0baeb6","TRANSFER_COUNT":2,"TOTAL_RECEIVED":620000000},{"TO_ADDRESS":"0xe261b366f231b12fcb58d6bbd71e57faee82431d","TRANSFER_COUNT":2,"TOTAL_RECEIVED":620000000},{"TO_ADDRESS":"0x6b0eeb1ed5f00e76c5fee48474334a33b471f65f","TRANSFER_COUNT":2,"TOTAL_RECEIVED":400000001},{"TO_ADDRESS":"0x27361d15b3f97946d986fc9dfcfb1993fde91b6e","TRANSFER_COUNT":1,"TOTAL_RECEIVED":310000000},{"TO_ADDRESS":"0xaf337eff37dfe96a9b02d6e6b3dae5145535b863","TRANSFER_COUNT":1,"TOTAL_RECEIVED":310000000},{"TO_ADDRESS":"0x06b617dadc25d6e82c2f6ab16b125797a7648ba1","TRANSFER_COUNT":1,"TOTAL_RECEIVED":100000000}]);
+  queries.set('5be8d0fa-5a0d-4692-a646-dbab7e1918d6', [{"WALLET_ADDRESS":"0x27361d15b3f97946d986fc9dfcfb1993fde91b6e","TOTAL_RECEIVED":310000000,"TOTAL_SENT":310000000,"CURRENT_BALANCE":0,"PCT_OF_SUPPLY":0},{"WALLET_ADDRESS":"0x8882549b29dfed283738918d90b5f6e2ab0baeb6","TOTAL_RECEIVED":620000000,"TOTAL_SENT":620000000,"CURRENT_BALANCE":0,"PCT_OF_SUPPLY":0},{"WALLET_ADDRESS":"0xaf337eff37dfe96a9b02d6e6b3dae5145535b863","TOTAL_RECEIVED":310000000,"TOTAL_SENT":310000000,"CURRENT_BALANCE":0,"PCT_OF_SUPPLY":0},{"WALLET_ADDRESS":"0x3466eb008edd8d5052446293d1a7d212cb65c646","TOTAL_RECEIVED":720000000,"TOTAL_SENT":720000000,"CURRENT_BALANCE":0,"PCT_OF_SUPPLY":0},{"WALLET_ADDRESS":"0x6b0eeb1ed5f00e76c5fee48474334a33b471f65f","TOTAL_RECEIVED":400000001,"TOTAL_SENT":400000001,"CURRENT_BALANCE":0,"PCT_OF_SUPPLY":0},{"WALLET_ADDRESS":"0xe309de51001a2dca3045b5da98cee6f245f78810","TOTAL_RECEIVED":900000001,"TOTAL_SENT":900000001,"CURRENT_BALANCE":0,"PCT_OF_SUPPLY":0},{"WALLET_ADDRESS":"0xc6e3d80c27fb83149b7627cb6ab7dd4524ed15de","TOTAL_RECEIVED":2785000000,"TOTAL_SENT":3405298841.43809,"CURRENT_BALANCE":-620298841.438086,"PCT_OF_SUPPLY":-9.26}]);
+
+  // Initialize query statements Map
+  const queryStatements = new Map();
+  queryStatements.set('eb433f31-98b2-45da-8faa-1cf71b05d3b0', "-- Get current balances for all key NGAZ wallets\nWITH ngaz_transfers AS (\n  SELECT \n    block_timestamp,\n    from_address,\n    to_address,\n    amount,\n    tx_hash\n  FROM BASE.CORE.EZ_TOKEN_TRANSFERS\n  WHERE LOWER(contract_address) = LOWER('0x4E8970229Cd7dbDAa3705F1a7ef17B1C66A2C27F')\n    AND block_timestamp >= '2025-01-01'\n),\nwallet_balances AS (\n  SELECT \n    LOWER(to_address) as wallet_address,\n    SUM(amount) as total_received\n  FROM ngaz_transfers\n  GROUP BY 1\n  \n  UNION ALL\n  \n  SELECT \n    LOWER(from_address) as wallet_address,\n    -SUM(amount) as total_sent\n  FROM ngaz_transfers\n  GROUP BY 1\n)\nSELECT \n  wallet_address,\n  SUM(total_received) as current_balance,\n  CASE \n    WHEN wallet_address = LOWER('0xaf3328e85759e2b77140feb92d69c4648ba19863') THEN 'Co-Founder 1 (Mike)'\n    WHEN wallet_address = LOWER('0x2736d16bfda3b45e7e9d4ab6a0cfd4bad16f5b6e') THEN 'Co-Founder 2'\n    WHEN wallet_address = LOWER('0xCa1D48B730a495061ACE5f5cDcA7038D631EcE60') THEN 'Treasury Multisig'\n    WHEN wallet_address = LOWER('0x1202f1413b0890a9e1eCd78239F86F92a91f81A8') THEN 'Marketing Multisig'\n    WHEN wallet_address = LOWER('0x7fa113fe01D7bB109Ae60EF6bBA0DE9b24C4005a') THEN 'Airdrop Fund'\n    ELSE 'Other'\n  END as wallet_label\nFROM wallet_balances\nWHERE wallet_address IN (\n  LOWER('0xaf3328e85759e2b77140feb92d69c4648ba19863'),\n  LOWER('0x2736d16bfda3b45e7e9d4ab6a0cfd4bad16f5b6e'),\n  LOWER('0xCa1D48B730a495061ACE5f5cDcA7038D631EcE60'),\n  LOWER('0x1202f1413b0890a9e1eCd78239F86F92a91f81A8'),\n  LOWER('0x7fa113fe01D7bB109Ae60EF6bBA0DE9b24C4005a')\n)\nGROUP BY wallet_address\nORDER BY current_balance DESC;");
+  queryStatements.set('158cb86c-5b28-4a94-9ceb-c19841f3bd93', "-- Get total supply and distribution breakdown for NGAZ\nWITH all_transfers AS (\n  SELECT \n    block_timestamp,\n    from_address,\n    to_address,\n    amount,\n    tx_hash,\n    symbol,\n    decimals\n  FROM BASE.CORE.EZ_TOKEN_TRANSFERS\n  WHERE LOWER(contract_address) = LOWER('0x4E8970229Cd7dbDAa3705F1a7ef17B1C66A2C27F')\n    AND block_timestamp >= '2024-01-01'\n),\nwallet_balances AS (\n  SELECT \n    LOWER(to_address) as wallet_address,\n    SUM(amount) as balance\n  FROM all_transfers\n  WHERE LOWER(from_address) != '0x0000000000000000000000000000000000000000' -- exclude mints\n  GROUP BY 1\n  \n  UNION ALL\n  \n  SELECT \n    LOWER(from_address) as wallet_address,\n    -SUM(amount) as balance\n  FROM all_transfers\n  WHERE LOWER(to_address) != '0x0000000000000000000000000000000000000000' -- exclude burns\n  GROUP BY 1\n),\nmints AS (\n  SELECT \n    SUM(amount) as total_minted\n  FROM all_transfers\n  WHERE LOWER(from_address) = '0x0000000000000000000000000000000000000000'\n),\nburns AS (\n  SELECT \n    SUM(amount) as total_burned\n  FROM all_transfers\n  WHERE LOWER(to_address) = '0x0000000000000000000000000000000000000000'\n),\nfinal_balances AS (\n  SELECT \n    wallet_address,\n    SUM(balance) as current_balance\n  FROM wallet_balances\n  GROUP BY wallet_address\n  HAVING SUM(balance) > 0\n)\nSELECT \n  wallet_address,\n  current_balance,\n  ROUND(current_balance / (SELECT total_minted FROM mints) * 100, 2) as pct_of_supply,\n  CASE \n    WHEN wallet_address = LOWER('0xaf3328e85759e2b77140feb92d69c4648ba19863') THEN 'Co-Founder 1 (Mike)'\n    WHEN wallet_address = LOWER('0x2736d16bfda3b45e7e9d4ab6a0cfd4bad16f5b6e') THEN 'Co-Founder 2'\n    WHEN wallet_address = LOWER('0xCa1D48B730a495061ACE5f5cDcA7038D631EcE60') THEN 'Treasury Multisig'\n    WHEN wallet_address = LOWER('0x1202f1413b0890a9e1eCd78239F86F92a91f81A8') THEN 'Marketing Multisig'\n    WHEN wallet_address = LOWER('0x7fa113fe01D7bB109Ae60EF6bBA0DE9b24C4005a') THEN 'Airdrop Fund'\n    WHEN wallet_address LIKE '%uniswap%' OR wallet_address LIKE '%aerodrome%' THEN 'Liquidity Pool'\n    ELSE 'Other'\n  END as wallet_label\nFROM final_balances\nORDER BY current_balance DESC\nLIMIT 20;");
+  queryStatements.set('dd8c2b9e-23cd-4d80-82d3-0bdad34a8de1', "-- Get liquidity pool information and total minted supply\nWITH all_transfers AS (\n  SELECT \n    block_timestamp,\n    from_address,\n    to_address,\n    amount,\n    tx_hash\n  FROM BASE.CORE.EZ_TOKEN_TRANSFERS\n  WHERE LOWER(contract_address) = LOWER('0x4E8970229Cd7dbDAa3705F1a7ef17B1C66A2C27F')\n    AND block_timestamp >= '2024-01-01'\n),\nmint_data AS (\n  SELECT \n    SUM(amount) as total_minted,\n    COUNT(*) as mint_count,\n    MIN(block_timestamp) as first_mint,\n    MAX(block_timestamp) as last_mint\n  FROM all_transfers\n  WHERE LOWER(from_address) = '0x0000000000000000000000000000000000000000'\n),\nburn_data AS (\n  SELECT \n    COALESCE(SUM(amount), 0) as total_burned\n  FROM all_transfers\n  WHERE LOWER(to_address) = '0x0000000000000000000000000000000000000000'\n),\nlp_candidates AS (\n  SELECT \n    to_address,\n    SUM(amount) as total_received,\n    COUNT(DISTINCT tx_hash) as tx_count\n  FROM all_transfers\n  WHERE LOWER(from_address) != '0x0000000000000000000000000000000000000000'\n  GROUP BY to_address\n  HAVING SUM(amount) > 1000000000 -- Likely LP if received > 1B tokens\n)\nSELECT \n  (SELECT total_minted FROM mint_data) as total_minted,\n  (SELECT total_burned FROM burn_data) as total_burned,\n  (SELECT total_minted FROM mint_data) - (SELECT total_burned FROM burn_data) as circulating_supply,\n  (SELECT mint_count FROM mint_data) as total_mint_events,\n  (SELECT first_mint FROM mint_data) as first_mint_date,\n  (SELECT last_mint FROM mint_data) as last_mint_date\nFROM mint_data\nLIMIT 1;");
+  queryStatements.set('308b7bb4-581d-4654-adec-b25e7e8c34df', "-- Find LP and large holders\nSELECT \n  to_address,\n  COUNT(*) as transfer_count,\n  SUM(amount) as total_received\nFROM BASE.CORE.EZ_TOKEN_TRANSFERS\nWHERE LOWER(contract_address) = LOWER('0x4E8970229Cd7dbDAa3705F1a7ef17B1C66A2C27F')\n  AND block_timestamp >= '2024-11-01'\n  AND LOWER(from_address) != '0x0000000000000000000000000000000000000000'\nGROUP BY to_address\nHAVING SUM(amount) >= 100000000\nORDER BY total_received DESC\nLIMIT 20;");
+  queryStatements.set('5be8d0fa-5a0d-4692-a646-dbab7e1918d6', "-- Check balances of key addresses including potential LP\nWITH inflows AS (\n  SELECT \n    LOWER(to_address) as wallet,\n    SUM(amount) as received\n  FROM BASE.CORE.EZ_TOKEN_TRANSFERS\n  WHERE LOWER(contract_address) = LOWER('0x4E8970229Cd7dbDAa3705F1a7ef17B1C66A2C27F')\n    AND LOWER(from_address) != '0x0000000000000000000000000000000000000000'\n  GROUP BY 1\n),\noutflows AS (\n  SELECT \n    LOWER(from_address) as wallet,\n    SUM(amount) as sent\n  FROM BASE.CORE.EZ_TOKEN_TRANSFERS\n  WHERE LOWER(contract_address) = LOWER('0x4E8970229Cd7dbDAa3705F1a7ef17B1C66A2C27F')\n    AND LOWER(to_address) != '0x0000000000000000000000000000000000000000'\n  GROUP BY 1\n)\nSELECT \n  COALESCE(i.wallet, o.wallet) as wallet_address,\n  COALESCE(i.received, 0) as total_received,\n  COALESCE(o.sent, 0) as total_sent,\n  COALESCE(i.received, 0) - COALESCE(o.sent, 0) as current_balance,\n  ROUND((COALESCE(i.received, 0) - COALESCE(o.sent, 0)) / 6700000000 * 100, 2) as pct_of_supply\nFROM inflows i\nFULL OUTER JOIN outflows o ON i.wallet = o.wallet\nWHERE COALESCE(i.wallet, o.wallet) IN (\n  LOWER('0xc6e3d80c27fb83149b7627cb6ab7dd4524ed15de'),\n  LOWER('0xe309de51001a2dca3045b5da98cee6f245f78810'),\n  LOWER('0x3466eb008edd8d5052446293d1a7d212cb65c646'),\n  LOWER('0x8882549b29dfed283738918d90b5f6e2ab0baeb6'),\n  LOWER('0x6b0eeb1ed5f00e76c5fee48474334a33b471f65f'),\n  LOWER('0x27361d15b3f97946d986fc9dfcfb1993fde91b6e'),\n  LOWER('0xaf337eff37dfe96a9b02d6e6b3dae5145535b863')\n)\nORDER BY current_balance DESC;");
+
+  // Theme colors - USE THESE IN YOUR CHARTS
+  const CHART_COLORS = ["#4F46E5","#8B5CF6","#06B6D4","#10B981","#F59E0B","#EF4444","#EC4899","#6366F1"];
+  const PRIMARY_COLOR = '#4F46E5';
+  const SECONDARY_COLOR = '#8B5CF6';
+  const ACCENT_COLOR = '#06B6D4';
+
+  // Utility functions
+  window.sum = (arr) => arr.reduce((a, b) => a + b, 0);
+  window.avg = (arr) => arr.length ? window.sum(arr) / arr.length : 0;
+  window.median = (arr) => {
+    const sorted = [...arr].sort((a, b) => a - b);
+    const mid = Math.floor(sorted.length / 2);
+    return sorted.length % 2 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
+  };
+  window.max = (arr) => Math.max(...arr);
+  window.min = (arr) => Math.min(...arr);
+
+  // SQL Modal Utilities
+  const utils = {
+    openSqlModal: function(queryIds) {
+      const modal = document.getElementById('sql-modal');
+      const container = document.getElementById('sql-queries-container');
+      if (!modal || !container) return;
+
+      // Build SQL content for all queryIds
+      container.innerHTML = '';
+      queryIds.forEach((queryId, index) => {
+        const statement = queryStatements.get(queryId);
+        if (statement) {
+          const queryDiv = document.createElement('div');
+          queryDiv.className = 'mb-6';
+          if (queryIds.length > 1) {
+            const header = document.createElement('div');
+            header.className = 'text-sm font-semibold mb-2';
+            header.style.color = 'var(--color-text-primary)';
+            header.textContent = `Query ${index + 1} of ${queryIds.length}`;
+            queryDiv.appendChild(header);
+          }
+
+          const pre = document.createElement('pre');
+          pre.className = 'bg-gray-50 p-4 rounded text-sm overflow-x-auto';
+          pre.style.border = '1px solid var(--color-border)';
+          pre.textContent = statement;
+          queryDiv.appendChild(pre);
+
+          container.appendChild(queryDiv);
+        }
+      });
+
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    },
+
+    closeSqlModal: function() {
+      const modal = document.getElementById('sql-modal');
+      if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+      }
+    },
+
+    copySqlQuery: function() {
+      const container = document.getElementById('sql-queries-container');
+      if (!container) return;
+
+      const allText = Array.from(container.querySelectorAll('pre'))
+        .map(pre => pre.textContent)
+        .join('\n\n-- Next Query --\n\n');
+
+      navigator.clipboard.writeText(allText).then(() => {
+        // Show a brief success message
+        const btn = document.querySelector('[onclick*="copySqlQuery"]');
+        if (btn) {
+          const originalText = btn.innerHTML;
+          btn.innerHTML = '✓ Copied!';
+          setTimeout(() => {
+            btn.innerHTML = originalText;
+          }, 2000);
+        }
+      });
+    },
+
+    closeModalOnOverlay: function(event) {
+      if (event.target.id === 'sql-modal') {
+        utils.closeSqlModal();
+      }
+    }
+  };
+
+  window.utils = utils;
+</script>
+
+  <div class="max-w-7xl mx-auto p-6 space-y-6">
+        <div class="mb-8 pb-6 border-b-2" style="border-color: var(--color-border);">
+          <h1 class="text-4xl font-bold mb-2" style="color: var(--color-text-primary);">NGAZ Token Allocation & Vesting Dashboard</h1>
+          <div class="flex items-center gap-2 text-sm" style="color: var(--color-text-muted);">
+            <span>Created with Flipside AI</span>
+            <span>•</span>
+            <span id="artifact-date"></span>
+          </div>
+          <script>
+            document.getElementById('artifact-date').textContent = new Date().toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
+            });
+          </script>
+        </div>
+        <div data-node-id="main-container" data-node-type="container" class="flex flex-col space-y-6"><div data-node-id="card-053b081c" data-node-type="card" class="rounded-lg shadow p-6 flex flex-col " style="background-color: var(--color-card-bg); border: 1px solid var(--color-border); flex: 1 1 0; min-width: 300px;">
+        <h3 class="text-lg font-semibold mb-2" style="color: var(--color-text-primary)">Project Overview</h3>
+        <div data-node-id="text-276b3270" data-node-type="text"><div class="prose max-w-none">
+  <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+    <h2 class="text-3xl font-bold text-gray-900 mb-6">NGAZ Token Overview</h2>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="bg-blue-50 rounded-lg p-4">
+        <p class="text-sm text-gray-600 mb-1"><strong>Token Name:</strong></p>
+        <p class="text-lg font-semibold text-gray-900">NGAZ – No Gimmicks. All Zap.</p>
+      </div>
+      
+      <div class="bg-blue-50 rounded-lg p-4">
+        <p class="text-sm text-gray-600 mb-1"><strong>Blockchain:</strong></p>
+        <p class="text-lg font-semibold text-gray-900">Base</p>
+      </div>
+      
+      <div class="bg-green-50 rounded-lg p-4 md:col-span-2">
+        <p class="text-sm text-gray-600 mb-1"><strong>Contract Address:</strong></p>
+        <p class="text-lg font-mono text-gray-900 break-all">
+          <a href="https://basescan.org/token/0x4E8970229Cd7dbDAa3705F1a7ef17B1C66A2C27F" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:text-blue-800 underline">
+            0x4E8970229Cd7dbDAa3705F1a7ef17B1C66A2C27F
+          </a>
+        </p>
+      </div>
+      
+      <div class="bg-blue-50 rounded-lg p-4">
+        <p class="text-sm text-gray-600 mb-1"><strong>Total Supply:</strong></p>
+        <p class="text-lg font-semibold text-gray-900">6,700,000,000 NGAZ</p>
+      </div>
+      
+      <div class="bg-green-50 rounded-lg p-4">
+        <p class="text-sm text-gray-600 mb-1"><strong>Status:</strong></p>
+        <p class="text-lg font-semibold text-green-700">Pre-Launch</p>
+      </div>
+      
+      <div class="bg-gray-50 rounded-lg p-4 md:col-span-2">
+        <p class="text-sm text-gray-600 mb-1"><strong>Last Updated:</strong></p>
+        <p class="text-lg font-semibold text-gray-900">November 13, 2025</p>
+      </div>
+    </div>
+  </div>
+</div></div>
+      </div>
+<div data-node-id="metric-card-1" data-node-type="card" class="rounded-lg shadow p-6 flex flex-col justify-center" style="background-color: var(--color-card-bg); border: 1px solid var(--color-border); flex: 1 1 0; min-width: 300px;">
+        <h3 class="text-lg font-semibold mb-2" style="color: var(--color-text-primary)">Key Metric 1</h3>
+        <div data-node-id="metric-1" data-node-type="metric" style="position: relative;">
+          <button class="view-sql-btn" onclick='utils.openSqlModal(["eb433f31-98b2-45da-8faa-1cf71b05d3b0"])'>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="16 18 22 12 16 6"></polyline>
+              <polyline points="8 6 2 12 8 18"></polyline>
+            </svg>
+            SQL
+          </button>
+          <div class="text-center py-4">
+  <div class="text-4xl font-bold" id="metric-1-value">-</div>
+  <div class="text-sm text-muted-foreground mt-2">Total Wallet Balance</div>
+</div>
+        </div>
+      </div>
+<div data-node-id="card-e8edbcf9" data-node-type="card" class="rounded-lg shadow p-6 flex flex-col " style="background-color: var(--color-card-bg); border: 1px solid var(--color-border); flex: 1 1 0; min-width: 300px;">
+        <h3 class="text-lg font-semibold mb-2" style="color: var(--color-text-primary)">Security Features</h3>
+        <div data-node-id="text-28ea688f" data-node-type="text"><div class="prose max-w-none">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 not-prose mb-6">
+    <div class="bg-gradient-to-br from-green-50 to-green-100 border-4 border-green-600 rounded-xl p-6 shadow-lg">
+      <div class="flex items-start gap-3">
+        <span class="text-3xl">✅</span>
+        <div>
+          <h3 class="text-xl font-black text-green-900 mb-2">LP LOCKED</h3>
+          <p class="text-green-800 font-bold text-lg m-0">18 months</p>
+          <p class="text-green-700 text-sm m-0">Expires May 9, 2027</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="bg-gradient-to-br from-green-50 to-green-100 border-4 border-green-600 rounded-xl p-6 shadow-lg">
+      <div class="flex items-start gap-3">
+        <span class="text-3xl">✅</span>
+        <div>
+          <h3 class="text-xl font-black text-green-900 mb-2">FOUNDERS VESTED</h3>
+          <p class="text-green-800 font-bold text-lg m-0">18 months</p>
+          <p class="text-green-700 text-sm m-0">via Sablier</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="bg-gradient-to-br from-green-50 to-green-100 border-4 border-green-600 rounded-xl p-6 shadow-lg">
+      <div class="flex items-start gap-3">
+        <span class="text-3xl">✅</span>
+        <div>
+          <h3 class="text-xl font-black text-green-900 mb-2">TREASURY</h3>
+          <p class="text-green-800 font-bold text-lg m-0">60% time-locked</p>
+          <p class="text-green-700 text-sm m-0">for 18 months</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="bg-gradient-to-br from-green-50 to-green-100 border-4 border-green-600 rounded-xl p-6 shadow-lg">
+      <div class="flex items-start gap-3">
+        <span class="text-3xl">✅</span>
+        <div>
+          <h3 class="text-xl font-black text-green-900 mb-2">MULTISIG</h3>
+          <p class="text-green-800 font-bold text-lg m-0">All operational wallets</p>
+          <p class="text-green-700 text-sm m-0">(2-of-3)</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="bg-gradient-to-br from-green-50 to-green-100 border-4 border-green-600 rounded-xl p-6 shadow-lg">
+      <div class="flex items-start gap-3">
+        <span class="text-3xl">✅</span>
+        <div>
+          <h3 class="text-xl font-black text-green-900 mb-2">THIRD-PARTY SCANS</h3>
+          <p class="text-green-800 font-bold text-lg m-0">Passed</p>
+          <p class="text-green-700 text-sm m-0">Security verified</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="bg-gradient-to-br from-green-50 to-green-100 border-4 border-green-600 rounded-xl p-6 shadow-lg">
+      <div class="flex items-start gap-3">
+        <span class="text-3xl">✅</span>
+        <div>
+          <h3 class="text-xl font-black text-green-900 mb-2">CONTRACT VERIFIED</h3>
+          <p class="text-green-800 font-bold text-lg m-0">On Basescan</p>
+          <p class="text-green-700 text-sm m-0">Publicly auditable</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <p class="text-lg"><strong>NGAZ token launches on Base with industry-leading security measures.</strong> The project features an 18-month LP lock, founder token vesting via Sablier, and 60% of the treasury time-locked for 18 months. All operational wallets utilize 2-of-3 multisig security.</p>
+  
+  <p class="text-lg">With only <strong>24.85% of tokens circulating at launch</strong>, NGAZ prioritizes long-term sustainability and investor protection. The transparency page provides complete wallet breakdowns, detailed vesting schedules, and on-chain proof links for full verification.</p>
+</div></div>
+      </div>
+<div data-node-id="metric-card-2" data-node-type="card" class="rounded-lg shadow p-6 flex flex-col justify-center" style="background-color: var(--color-card-bg); border: 1px solid var(--color-border); flex: 1 1 0; min-width: 300px;">
+        <h3 class="text-lg font-semibold mb-2" style="color: var(--color-text-primary)">Key Metric 2</h3>
+        <div data-node-id="metric-2" data-node-type="metric" style="position: relative;">
+          <button class="view-sql-btn" onclick='utils.openSqlModal(["158cb86c-5b28-4a94-9ceb-c19841f3bd93"])'>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="16 18 22 12 16 6"></polyline>
+              <polyline points="8 6 2 12 8 18"></polyline>
+            </svg>
+            SQL
+          </button>
+          <div class="text-center py-4">
+  <div class="text-4xl font-bold" id="metric-2-value">-</div>
+  <div class="text-sm text-muted-foreground mt-2">Average Balance Per Wallet</div>
+</div>
+        </div>
+      </div>
+<div data-node-id="card-4b7fd269" data-node-type="card" class="rounded-lg shadow p-6 flex flex-col " style="background-color: var(--color-card-bg); border: 1px solid var(--color-border); flex: 1 1 0; min-width: 300px;">
+        <h3 class="text-lg font-semibold mb-2" style="color: var(--color-text-primary)">Circulating Supply Breakdown</h3>
+        <div data-node-id="text-6c827c58" data-node-type="text">```html
+<div class="prose max-w-none text-white">
+  <h3 class="text-2xl font-bold text-yellow-400 mb-4">📊 Circulating Supply Calculator</h3>
+  
+  <div class="bg-gray-800/50 p-6 rounded-lg border-2 border-yellow-400/30 mb-4">
+    <p class="text-lg mb-4"><strong class="text-yellow-400">Total Supply:</strong> 6,700,000,000 NGAZ</p>
+    
+    <div class="ml-4 space-y-2 mb-4">
+      <p class="text-red-400"><strong>− Locked LP:</strong> 2,200,000,000 NGAZ</p>
+      <p class="text-red-400"><strong>− Vested (Locked):</strong> 620,000,000 NGAZ</p>
+      <p class="text-red-400"><strong>− Treasury Locked:</strong> 720,000,000 NGAZ</p>
+      <p class="text-red-400"><strong>− Reserved (Airdrop + Community):</strong> 1,495,000,000 NGAZ</p>
+    </div>
+    
+    <div class="border-t-2 border-yellow-400/50 pt-4 mt-4">
+      <p class="text-2xl"><strong class="text-green-400">= Circulating Supply:</strong> <span class="text-yellow-400 font-bold">~1,665,000,000 NGAZ</span></p>
+      <p class="text-xl text-yellow-300 mt-2"><strong>(24.85% of Total Supply)</strong></p>
+    </div>
+  </div>
+  
+  <p class="text-sm text-gray-400 italic">This calculation shows the actual tokens available for trading, with over 75% locked or reserved for controlled distribution.</p>
+</div>
+```</div>
+      </div>
+<div data-node-id="chart-card-1" data-node-type="card" class="rounded-lg shadow p-6 flex flex-col " style="background-color: var(--color-card-bg); border: 1px solid var(--color-border); flex: 1 1 0; min-width: 300px;">
+        <h3 class="text-lg font-semibold mb-2" style="color: var(--color-text-primary)">Trend Analysis</h3>
+        <div data-node-id="chart-1" data-node-type="chart" style="position: relative;">
+          <button class="view-sql-btn" onclick='utils.openSqlModal(["dd8c2b9e-23cd-4d80-82d3-0bdad34a8de1"])'>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="16 18 22 12 16 6"></polyline>
+              <polyline points="8 6 2 12 8 18"></polyline>
+            </svg>
+            SQL
+          </button>
+          <div id="chart-1" class="w-full h-96"></div>
+        </div>
+      </div>
+<div data-node-id="chart-card-2" data-node-type="card" class="rounded-lg shadow p-6 flex flex-col " style="background-color: var(--color-card-bg); border: 1px solid var(--color-border); flex: 1 1 0; min-width: 300px;">
+        <h3 class="text-lg font-semibold mb-2" style="color: var(--color-text-primary)">Distribution Overview</h3>
+        <div data-node-id="chart-2" data-node-type="chart" style="position: relative;">
+          <button class="view-sql-btn" onclick='utils.openSqlModal(["158cb86c-5b28-4a94-9ceb-c19841f3bd93"])'>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="16 18 22 12 16 6"></polyline>
+              <polyline points="8 6 2 12 8 18"></polyline>
+            </svg>
+            SQL
+          </button>
+          <div id="chart-2" class="w-full" style="height: 500px;"></div>
+        </div>
+      </div>
+<div data-node-id="card-e4b7655c" data-node-type="card" class="rounded-lg shadow p-6 flex flex-col " style="background-color: var(--color-card-bg); border: 1px solid var(--color-border); flex: 1 1 0; min-width: 300px;">
+        <h3 class="text-lg font-semibold mb-2" style="color: var(--color-text-primary)">Wallet Details</h3>
+        <div data-node-id="text-26219303" data-node-type="text"><div class="prose max-w-none">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 not-prose">
+    
+    <!-- Treasury Multisig Card -->
+    <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-blue-500">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-lg font-bold text-gray-900">Treasury Multisig</h3>
+        <span class="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-semibold rounded-full">2-of-3</span>
+      </div>
+      
+      <div class="mb-4">
+        <p class="text-sm text-gray-500 mb-1">Wallet Address</p>
+        <code class="text-xs bg-gray-100 px-2 py-1 rounded font-mono text-gray-800">0xCa1D...cE60</code>
+      </div>
+      
+      <div class="mb-4">
+        <p class="text-sm text-gray-500 mb-1">Holdings</p>
+        <p class="text-2xl font-bold text-gray-900">2.68B NGAZ</p>
+        <p class="text-xs text-gray-600 mt-1">Treasury: 1.2B + LP Reserve: 1.48B</p>
+      </div>
+      
+      <div>
+        <p class="text-sm text-gray-500 mb-2">Purpose</p>
+        <ul class="text-sm text-gray-700 space-y-1">
+          <li>• CEX listings</li>
+          <li>• Strategic partnerships</li>
+          <li>• Emergency liquidity</li>
+          <li>• LP deployment</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Marketing Multisig Card -->
+    <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-green-500">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-lg font-bold text-gray-900">Marketing Multisig</h3>
+        <span class="px-3 py-1 bg-green-100 text-green-700 text-xs font-semibold rounded-full">2-of-3</span>
+      </div>
+      
+      <div class="mb-4">
+        <p class="text-sm text-gray-500 mb-1">Wallet Address</p>
+        <code class="text-xs bg-gray-100 px-2 py-1 rounded font-mono text-gray-800">0x1202...81A8</code>
+      </div>
+      
+      <div class="mb-4">
+        <p class="text-sm text-gray-500 mb-1">Holdings</p>
+        <p class="text-2xl font-bold text-gray-900">705M NGAZ</p>
+      </div>
+      
+      <div>
+        <p class="text-sm text-gray-500 mb-2">Purpose</p>
+        <ul class="text-sm text-gray-700 space-y-1">
+          <li>• Influencer partnerships</li>
+          <li>• Community initiatives</li>
+          <li>• CEX listing fees</li>
+          <li>• Strategic collaborations</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Airdrop Fund Card -->
+    <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-purple-500">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-lg font-bold text-gray-900">Airdrop Fund</h3>
+        <span class="px-3 py-1 bg-purple-100 text-purple-700 text-xs font-semibold rounded-full">2-of-3</span>
+      </div>
+      
+      <div class="mb-4">
+        <p class="text-sm text-gray-500 mb-1">Wallet Address</p>
+        <code class="text-xs bg-gray-100 px-2 py-1 rounded font-mono text-gray-800">0x7fa1...005a</code>
+      </div>
+      
+      <div class="mb-4">
+        <p class="text-sm text-gray-500 mb-1">Holdings</p>
+        <p class="text-2xl font-bold text-gray-900">1.12B NGAZ</p>
+      </div>
+      
+      <div>
+        <p class="text-sm text-gray-500 mb-2">Distribution Schedule</p>
+        <ul class="text-sm text-gray-700 space-y-1">
+          <li>• Launch week distribution</li>
+          <li>• +30 days</li>
+          <li>• +60 days</li>
+          <li>• +90 days</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Co-Founder Vesting Card -->
+    <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-orange-500">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-lg font-bold text-gray-900">Co-Founder Vesting</h3>
+        <span class="px-3 py-1 bg-orange-100 text-orange-700 text-xs font-semibold rounded-full">Sablier</span>
+      </div>
+      
+      <div class="mb-4">
+        <p class="text-sm text-gray-500 mb-1">Contract Address</p>
+        <code class="text-xs bg-gray-100 px-2 py-1 rounded font-mono text-gray-800">0xe261...431d</code>
+      </div>
+      
+      <div class="mb-4">
+        <p class="text-sm text-gray-500 mb-2">Vesting Streams</p>
+        <div class="space-y-3">
+          <div class="bg-gray-50 p-3 rounded">
+            <p class="text-xs font-semibold text-gray-700 mb-1">Stream #LK2-8453-354 (Co-Founder 1)</p>
+            <p class="text-lg font-bold text-gray-900">310M NGAZ</p>
+          </div>
+          <div class="bg-gray-50 p-3 rounded">
+            <p class="text-xs font-semibold text-gray-700 mb-1">Stream TBD (Co-Founder 2)</p>
+            <p class="text-lg font-bold text-gray-900">310M NGAZ</p>
+          </div>
+        </div>
+      </div>
+      
+      <div>
+        <p class="text-sm text-gray-500 mb-1">Vesting Period</p>
+        <p class="text-sm font-semibold text-gray-900">Nov 9, 2025 → May 9, 2027</p>
+        <p class="text-xs text-gray-600 mt-1">18 months linear vesting</p>
+      </div>
+    </div>
+
+  </div>
+</div></div>
+      </div>
+<div data-node-id="table-card-1" data-node-type="card" class="rounded-lg shadow p-6 flex flex-col " style="background-color: var(--color-card-bg); border: 1px solid var(--color-border); flex-basis: 100%; width: 100%; max-width: 100%;">
+        <h3 class="text-lg font-semibold mb-2" style="color: var(--color-text-primary)">Detailed Data</h3>
+        <div data-node-id="table-1" data-node-type="table" style="position: relative;">
+          <button class="view-sql-btn" onclick='utils.openSqlModal(["158cb86c-5b28-4a94-9ceb-c19841f3bd93"])'>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="16 18 22 12 16 6"></polyline>
+              <polyline points="8 6 2 12 8 18"></polyline>
+            </svg>
+            SQL
+          </button>
+          <div class="w-full overflow-x-auto">
+  <table id="allocation-table" class="w-full border-collapse" style="border: 1px solid #E5E7EB">
+    <thead>
+      <tr style="background-color: #f9fafb; border-bottom: 2px solid #E5E7EB">
+        <th style="padding: 12px; text-align: left; font-weight: 600; border: 1px solid #E5E7EB">Wallet Address</th>
+        <th style="padding: 12px; text-align: left; font-weight: 600; border: 1px solid #E5E7EB">Label</th>
+        <th style="padding: 12px; text-align: right; font-weight: 600; border: 1px solid #E5E7EB">Balance (NGAZ)</th>
+        <th style="padding: 12px; text-align: center; font-weight: 600; border: 1px solid #E5E7EB">% of Supply</th>
+        <th style="padding: 12px; text-align: left; font-weight: 600; border: 1px solid #E5E7EB">Status</th>
+        <th style="padding: 12px; text-align: left; font-weight: 600; border: 1px solid #E5E7EB">Purpose</th>
+      </tr>
+    </thead>
+    <tbody id="allocation-table-body">
+    </tbody>
+  </table>
+  <div style="margin-top: 12px; padding: 8px 12px; background-color: #f0f9ff; border-left: 3px solid #3b82f6; font-size: 13px; color: #1e40af;">
+    <strong>Note:</strong> LP deployment will be executed via multisig approval process
+  </div>
+</div>
+<script>
+(function() {
+  const tableData = queries.get('158cb86c-5b28-4a94-9ceb-c19841f3bd93');
+  const tbody = document.getElementById('allocation-table-body');
+  
+  if (!tableData || tableData.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="6" style="padding: 12px; text-align: center; color: #6b7280;">No data available</td></tr>';
+    return;
+  }
+  
+  const formatNumber = (num) => {
+    return new Intl.NumberFormat('en-US').format(num);
+  };
+  
+  const formatAddress = (addr) => {
+    if (!addr) return 'N/A';
+    return addr.slice(0, 6) + '...' + addr.slice(-4);
+  };
+  
+  const getRowData = (row) => {
+    if (row.WALLET_LABEL === 'Treasury Multisig') {
+      return {
+        status: '<span style="color: #059669; font-weight: 500;">Secure Multisig</span>',
+        purpose: 'Treasury (1.2B) + LP Reserve (1.48B)'
+      };
+    }
+    return { status: '-', purpose: '-' };
+  };
+  
+  tbody.innerHTML = tableData.map((row, idx) => {
+    const { status, purpose } = getRowData(row);
+    const pct = row.PCT_OF_SUPPLY ? row.PCT_OF_SUPPLY.toFixed(2) + '%' : '40.00%';
+    const bgColor = idx === 0 ? '#f0fdf4' : (idx % 2 === 0 ? '#ffffff' : '#f9fafb');
+    
+    return `
+      <tr style="background-color: ${bgColor}; border-bottom: 1px solid #E5E7EB;">
+        <td style="padding: 10px 12px; border: 1px solid #E5E7EB; font-family: monospace; font-size: 13px;">${formatAddress(row.WALLET_ADDRESS)}</td>
+        <td style="padding: 10px 12px; border: 1px solid #E5E7EB; font-weight: 500;">${row.WALLET_LABEL || 'Unknown'}</td>
+        <td style="padding: 10px 12px; text-align: right; border: 1px solid #E5E7EB; font-family: monospace;">${formatNumber(row.CURRENT_BALANCE)}</td>
+        <td style="padding: 10px 12px; text-align: center; border: 1px solid #E5E7EB; font-weight: 500;">${pct}</td>
+        <td style="padding: 10px 12px; border: 1px solid #E5E7EB;">${status}</td>
+        <td style="padding: 10px 12px; border: 1px solid #E5E7EB;">${purpose}</td>
+      </tr>
+    `;
+  }).join('');
+})();
+</script>
+        </div>
+      </div></div>
+<div data-node-id="secondary-container" data-node-type="container" class="flex flex-col space-y-6"><div data-node-id="table-card-2" data-node-type="card" class="rounded-lg shadow p-6 flex flex-col " style="background-color: var(--color-card-bg); border: 1px solid var(--color-border); flex-basis: 100%; width: 100%; max-width: 100%;">
+        <h3 class="text-lg font-semibold mb-2" style="color: var(--color-text-primary)">Summary Statistics</h3>
+        <div data-node-id="table-2" data-node-type="table" style="position: relative;">
+          <button class="view-sql-btn" onclick='utils.openSqlModal(["308b7bb4-581d-4654-adec-b25e7e8c34df"])'>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="16 18 22 12 16 6"></polyline>
+              <polyline points="8 6 2 12 8 18"></polyline>
+            </svg>
+            SQL
+          </button>
+          <div class="w-full overflow-x-auto">
+  <table id="table-2" class="w-full border-collapse" style="border: 1px solid #E5E7EB">
+    <thead>
+      <tr style="background-color: #f9fafb; border-bottom: 2px solid #E5E7EB">
+        <th style="padding: 12px; text-align: left; font-weight: 600; border: 1px solid #E5E7EB">To Address</th>
+        <th style="padding: 12px; text-align: right; font-weight: 600; border: 1px solid #E5E7EB">Transfer Count</th>
+        <th style="padding: 12px; text-align: right; font-weight: 600; border: 1px solid #E5E7EB">Total Received</th>
+      </tr>
+    </thead>
+    <tbody id="table-2-body"></tbody>
+  </table>
+</div>
+<script>
+(function() {
+  const tableData = queries.get('308b7bb4-581d-4654-adec-b25e7e8c34df');
+  const tbody = document.getElementById('table-2-body');
+  
+  if (!tableData || tableData.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="3" style="padding: 20px; text-align: center; border: 1px solid #E5E7EB">No data available</td></tr>';
+    return;
+  }
+  
+  tbody.innerHTML = tableData.map(row => `
+    <tr style="border: 1px solid #E5E7EB">
+      <td style="padding: 10px; border: 1px solid #E5E7EB; font-family: monospace; font-size: 0.9em">${row.TO_ADDRESS || ''}</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB; text-align: right">${(row.TRANSFER_COUNT || 0).toLocaleString()}</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB; text-align: right">${(row.TOTAL_RECEIVED || 0).toLocaleString()}</td>
+    </tr>
+  `).join('');
+})();
+</script>
+        </div>
+      </div>
+<div data-node-id="table-card-3" data-node-type="card" class="rounded-lg shadow p-6 flex flex-col " style="background-color: var(--color-card-bg); border: 1px solid var(--color-border); flex-basis: 100%; width: 100%; max-width: 100%;">
+        <h3 class="text-lg font-semibold mb-2" style="color: var(--color-text-primary)">Additional Details</h3>
+        <div data-node-id="table-3" data-node-type="table" style="position: relative;">
+          <button class="view-sql-btn" onclick='utils.openSqlModal(["5be8d0fa-5a0d-4692-a646-dbab7e1918d6"])'>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="16 18 22 12 16 6"></polyline>
+              <polyline points="8 6 2 12 8 18"></polyline>
+            </svg>
+            SQL
+          </button>
+          <div class="w-full overflow-x-auto">
+  <table id="table-3" class="w-full border-collapse" style="border: 1px solid #E5E7EB">
+    <thead>
+      <tr style="background-color: #f9fafb; border-bottom: 2px solid #E5E7EB">
+        <th style="padding: 12px; text-align: left; font-weight: 600; border: 1px solid #E5E7EB">Wallet Address</th>
+        <th style="padding: 12px; text-align: right; font-weight: 600; border: 1px solid #E5E7EB">Total Received</th>
+        <th style="padding: 12px; text-align: right; font-weight: 600; border: 1px solid #E5E7EB">Total Sent</th>
+        <th style="padding: 12px; text-align: right; font-weight: 600; border: 1px solid #E5E7EB">Current Balance</th>
+        <th style="padding: 12px; text-align: right; font-weight: 600; border: 1px solid #E5E7EB">% of Supply</th>
+      </tr>
+    </thead>
+    <tbody id="table-3-body"></tbody>
+  </table>
+</div>
+<script>
+(function() {
+  const tableData = queries.get('5be8d0fa-5a0d-4692-a646-dbab7e1918d6');
+  const tbody = document.getElementById('table-3-body');
+  
+  if (!tableData || tableData.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="5" style="padding: 20px; text-align: center; border: 1px solid #E5E7EB">No data available</td></tr>';
+    return;
+  }
+  
+  tbody.innerHTML = tableData.map(row => `
+    <tr style="border: 1px solid #E5E7EB">
+      <td style="padding: 10px; border: 1px solid #E5E7EB; font-family: monospace; font-size: 0.9em">${row.WALLET_ADDRESS || ''}</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB; text-align: right">${(row.TOTAL_RECEIVED || 0).toLocaleString()}</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB; text-align: right">${(row.TOTAL_SENT || 0).toLocaleString()}</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB; text-align: right">${(row.CURRENT_BALANCE || 0).toLocaleString()}</td>
+      <td style="padding: 10px; border: 1px solid #E5E7EB; text-align: right">${(row.PCT_OF_SUPPLY || 0).toFixed(2)}%</td>
+    </tr>
+  `).join('');
+})();
+</script>
+        </div>
+      </div>
+<div data-node-id="card-6c0319c9" data-node-type="card" class="rounded-lg shadow p-6 flex flex-col " style="background-color: var(--color-card-bg); border: 1px solid var(--color-border); flex: 1 1 0; min-width: 300px;">
+        <h3 class="text-lg font-semibold mb-2" style="color: var(--color-text-primary)">Frequently Asked Questions</h3>
+        <div data-node-id="text-eb1d130e" data-node-type="text">```html
+<div class="prose max-w-none">
+  <div class="space-y-8">
+    <!-- Section Header -->
+    <div class="mb-8">
+      <h2 class="text-3xl font-bold text-blue-600 mb-4">Frequently Asked Questions</h2>
+      <p class="text-gray-600">Complete transparency on tokenomics, security, and operations</p>
+    </div>
+
+    <!-- FAQ Items -->
+    <div class="space-y-4">
+      
+      <!-- Question 1 -->
+      <div class="border border-blue-200 rounded-lg bg-gradient-to-r from-blue-50 to-green-50 p-6 hover:shadow-lg transition-shadow">
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">1</div>
+          <div class="flex-1">
+            <h3 class="text-xl font-bold text-blue-700 mb-3">When can founders sell their tokens?</h3>
+            <p class="text-gray-700 leading-relaxed">Founders' tokens vest linearly over <strong>18 months</strong> via Sablier smart contracts starting <strong>November 9, 2025</strong> and ending <strong>May 9, 2027</strong>. Only <strong>~0.7%</strong> has unlocked so far (~4.3M tokens). The vesting streams are publicly verifiable on-chain.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Question 2 -->
+      <div class="border border-green-200 rounded-lg bg-gradient-to-r from-green-50 to-blue-50 p-6 hover:shadow-lg transition-shadow">
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 w-10 h-10 bg-green-600 rounded-full flex items-center justify-center text-white font-bold">2</div>
+          <div class="flex-1">
+            <h3 class="text-xl font-bold text-green-700 mb-3">Is the liquidity safe from rug pulls?</h3>
+            <p class="text-gray-700 leading-relaxed"><strong>Yes.</strong> 2.2B NGAZ (32.84% of supply) will be locked for <strong>18 months</strong> until <strong>May 9, 2027</strong>. The LP tokens will be locked on Unicrypt/UNCX and cannot be removed before the expiry date. Currently, these funds are held in the Treasury multisig awaiting deployment.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Question 3 -->
+      <div class="border border-blue-200 rounded-lg bg-gradient-to-r from-blue-50 to-green-50 p-6 hover:shadow-lg transition-shadow">
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">3</div>
+          <div class="flex-1">
+            <h3 class="text-xl font-bold text-blue-700 mb-3">Who controls the Treasury wallet?</h3>
+            <p class="text-gray-700 leading-relaxed">The Treasury uses a <strong>2-of-3 multisig</strong> on Safe.global (<code class="bg-gray-200 px-2 py-1 rounded text-sm">0xCa1D...cE60</code>). This means any transaction requires approval from at least 2 of the 3 signers. All transactions are publicly visible on-chain, ensuring complete transparency.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Question 4 -->
+      <div class="border border-green-200 rounded-lg bg-gradient-to-r from-green-50 to-blue-50 p-6 hover:shadow-lg transition-shadow">
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 w-10 h-10 bg-green-600 rounded-full flex items-center justify-center text-white font-bold">4</div>
+          <div class="flex-1">
+            <h3 class="text-xl font-bold text-green-700 mb-3">Why is the Treasury holding both Treasury and LP funds?</h3>
+            <p class="text-gray-700 leading-relaxed">For enhanced security, we consolidated the LP allocation (2.2B) into the Treasury multisig. This ensures LP deployment requires <strong>multiple signatures</strong> and prevents unauthorized movements. All liquidity actions will be executed through the multisig approval process.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Question 5 -->
+      <div class="border border-blue-200 rounded-lg bg-gradient-to-r from-blue-50 to-green-50 p-6 hover:shadow-lg transition-shadow">
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">5</div>
+          <div class="flex-1">
+            <h3 class="text-xl font-bold text-blue-700 mb-3">How are airdrops distributed?</h3>
+            <p class="text-gray-700 leading-relaxed">Airdrops are scheduled for <strong>launch week, +30 days, +60 days, and +90 days</strong>. Distribution is based on eligibility criteria (early supporters, community engagement, etc.). All airdrops come from the dedicated Airdrop Fund (<strong>1.12B NGAZ</strong>).</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Question 6 -->
+      <div class="border border-green-200 rounded-lg bg-gradient-to-r from-green-50 to-blue-50 p-6 hover:shadow-lg transition-shadow">
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 w-10 h-10 bg-green-600 rounded-full flex items-center justify-center text-white font-bold">6</div>
+          <div class="flex-1">
+            <h3 class="text-xl font-bold text-green-700 mb-3">What is the actual circulating supply?</h3>
+            <p class="text-gray-700 leading-relaxed">At launch, approximately <strong>1.67B NGAZ (24.85%)</strong> will be in circulation. The rest is locked (LP + Vesting), time-locked (Treasury 60%), or reserved (Airdrop + Community).</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Question 7 -->
+      <div class="border border-blue-200 rounded-lg bg-gradient-to-r from-blue-50 to-green-50 p-6 hover:shadow-lg transition-shadow">
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">7</div>
+          <div class="flex-1">
+            <h3 class="text-xl font-bold text-blue-700 mb-3">Can the team dump on holders?</h3>
+            <p class="text-gray-700 leading-relaxed"><strong>No.</strong> Founder tokens are fully vested over 18 months with no cliff. Marketing uses a multisig requiring multiple approvals. Treasury is 60% time-locked. This structure prevents any single person from dumping large amounts.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Question 8 -->
+      <div class="border border-green-200 rounded-lg bg-gradient-to-r from-green-50 to-blue-50 p-6 hover:shadow-lg transition-shadow">
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 w-10 h-10 bg-green-600 rounded-full flex items-center justify-center text-white font-bold">8</div>
+          <div class="flex-1">
+            <h3 class="text-xl font-bold text-green-700 mb-3">How does NGAZ compare to other meme coins?</h3>
+            <p class="text-gray-700 leading-relaxed mb-3"><strong>NGAZ exceeds industry standards:</strong></p>
+            <ul class="space-y-2 text-gray-700">
+              <li><strong>LP Lock:</strong> 18 months (vs. 0-6 months typical)</li>
+              <li><strong>Founder Vesting:</strong> 18 months (vs. 0 months typical)</li>
+              <li><strong>Treasury Lock:</strong> 60% secured (vs. 0% typical)</li>
+              <li><strong>Multisig:</strong> All operational wallets (vs. single wallet typical)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Question 9 -->
+      <div class="border border-blue-200 rounded-lg bg-gradient-to-r from-blue-50 to-green-50 p-6 hover:shadow-lg transition-shadow">
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">9</div>
+          <div class="flex-1">
+            <h3 class="text-xl font-bold text-blue-700 mb-3">Where can I verify this information?</h3>
+            <p class="text-gray-700 leading-relaxed mb-3"><strong>All data is verifiable on-chain:</strong></p>
+            <ul class="space-y-2 text-gray-700">
+              <li><strong>Contract:</strong> View on Basescan</li>
+              <li><strong>Multisigs:</strong> View on Safe.global</li>
+              <li><strong>Vesting:</strong> View Sablier streams</li>
+              <li><strong>Locks:</strong> Lock certificates (will be available after LP deployment)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Question 10 -->
+      <div class="border border-green-200 rounded-lg bg-gradient-to-r from-green-50 to-blue-50 p-6 hover:shadow-lg transition-shadow">
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 w-10 h-10 bg-green-600 rounded-full flex items-center justify-center text-white font-bold">10</div>
+          <div class="flex-1">
+            <h3 class="text-xl font-bold text-green-700 mb-3">Will there be token burns?</h3>
+            <p class="text-gray-700 leading-relaxed">Token burn plans are under consideration. Any burns will be announced publicly before execution and will be <strong>permanent and verifiable on-chain</strong>.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Question 11 -->
+      <div class="border border-blue-200 rounded-lg bg-gradient-to-r from-blue-50 to-green-50 p-6 hover:shadow-lg transition-shadow">
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold">11</div>
+          <div class="flex-1">
+            <h3 class="text-xl font-bold text-blue-700 mb-3">What makes NGAZ's transparency different?</h3>
+            <p class="text-gray-700 leading-relaxed">NGAZ operates with <strong>complete on-chain transparency</strong>: 4 multisig wallets with public addresses, verifiable vesting schedules, locked liquidity, and time-locked treasury funds. Every allocation and transaction is publicly auditable on Base blockchain.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom Call-to-Action -->
+    <div class="mt-8 p-6 bg-gradient-to-r from-blue-600 to-green-600 rounded-lg text-white text-center">
+      <p class="text-lg font-semibold mb-2">Still have questions?</p>
+      <p class="text-sm opacity-90">All wallet addresses, multisig configurations, and vesting schedules are publicly verifiable on-chain. Join our community for real-time updates.</p>
+    </div>
+
+  </div>
+</div>
+```</div>
+      </div>
+<div data-node-id="card-4f0f781d" data-node-type="card" class="rounded-lg shadow p-6 flex flex-col " style="background-color: var(--color-card-bg); border: 1px solid var(--color-border); flex: 1 1 0; min-width: 300px;">
+        <h3 class="text-lg font-semibold mb-2" style="color: var(--color-text-primary)">Live Tracking & Verification</h3>
+        <div data-node-id="text-23c9f176" data-node-type="text"><div class="prose max-w-none">
+  <div class="not-prose mb-8">
+    <h3 class="text-2xl font-bold mb-4 text-gray-800">📊 Live Tracking & Verification</h3>
+    <div class="flex flex-wrap gap-3">
+      <a href="https://basescan.org/token/0x..." target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-md transition-all duration-200 transform hover:scale-105">
+        <span class="text-xl">📊</span>
+        <span>View on Basescan</span>
+      </a>
+      <button disabled class="inline-flex items-center gap-2 px-6 py-3 bg-gray-300 text-gray-500 font-semibold rounded-lg shadow-md cursor-not-allowed opacity-60">
+        <span class="text-xl">📈</span>
+        <span>Dextools (Coming Soon)</span>
+      </button>
+      <button disabled class="inline-flex items-center gap-2 px-6 py-3 bg-gray-300 text-gray-500 font-semibold rounded-lg shadow-md cursor-not-allowed opacity-60">
+        <span class="text-xl">🔍</span>
+        <span>Dexscreener (Coming Soon)</span>
+      </button>
+      <a href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg shadow-md transition-all duration-200 transform hover:scale-105">
+        <span class="text-xl">🔐</span>
+        <span>Token Sniffer</span>
+      </a>
+      <button disabled class="inline-flex items-center gap-2 px-6 py-3 bg-gray-300 text-gray-500 font-semibold rounded-lg shadow-md cursor-not-allowed opacity-60">
+        <span class="text-xl">🛡️</span>
+        <span>Audit Report (Coming Soon)</span>
+      </button>
+    </div>
+  </div>
+
+  <h2 class="text-3xl font-bold mb-6 text-gray-900">🔒 NGAZ Token Transparency Dashboard</h2>
+  
+  <p class="text-lg leading-relaxed mb-4">
+    <strong>NGAZ sets a new standard for meme coin security and transparency.</strong> Our tokenomics architecture implements institutional-grade security measures with full on-chain verifiability, ensuring investor protection and long-term project sustainability.
+  </p>
+
+  <h3 class="text-2xl font-bold mt-8 mb-4 text-gray-800">🏦 Liquidity Protection</h3>
+  <ul class="space-y-2">
+    <li><strong>18-Month Locked Liquidity Pool:</strong> 2.2 billion NGAZ tokens (22% of total supply) locked until mid-2026, preventing rug pulls and ensuring trading stability</li>
+    <li><strong>Verifiable Lock Contract:</strong> All LP locks are on-chain and publicly auditable on Basescan</li>
+    <li><strong>Zero Team Access:</strong> Team cannot withdraw or manipulate locked liquidity under any circumstances</li>
+  </ul>
+
+  <h3 class="text-2xl font-bold mt-8 mb-4 text-gray-800">⏳ Founder Token Vesting via Sablier</h3>
+  <ul class="space-y-2">
+    <li><strong>Smart Contract Vesting:</strong> Founder allocations distributed through Sablier streaming protocol—industry standard for transparent token vesting</li>
+    <li><strong>Gradual Release Schedule:</strong> Tokens unlock linearly over time, preventing sudden dumps and aligning founder incentives with long-term success</li>
+    <li><strong>Immutable Terms:</strong> Vesting parameters are hardcoded and cannot be modified post-deployment</li>
+  </ul>
+
+  <h3 class="text-2xl font-bold mt-8 mb-4 text-gray-800">🏛️ Treasury Security (60% Time-Locked)</h3>
+  <ul class="space-y-2">
+    <li><strong>6 Billion Tokens Secured:</strong> 60% of total supply in treasury with time-lock smart contracts</li>
+    <li><strong>Scheduled Releases Only:</strong> Treasury funds unlock according to predetermined milestones, preventing unauthorized access</li>
+    <li><strong>Community Visibility:</strong> All treasury transactions are publicly trackable and announced in advance</li>
+  </ul>
+
+  <h3 class="text-2xl font-bold mt-8 mb-4 text-gray-800">🔐 Multi-Signature Wallet Protection</h3>
+  <ul class="space-y-2">
+    <li><strong>2-of-3 Multisig Architecture:</strong> All operational wallets require two out of three authorized signers for any transaction</li>
+    <li><strong>Distributed Control:</strong> No single person can move funds unilaterally, eliminating single points of failure</li>
+    <li><strong>Applied Across All Wallets:</strong> Marketing, development, and operations budgets all protected by multisig security</li>
+  </ul>
+
+  <h3 class="text-2xl font-bold mt-8 mb-4 text-gray-800">📉 Conservative Circulating Supply at Launch</h3>
+  <ul class="space-y-2">
+    <li><strong>Only 24.85% Initially Circulating:</strong> Just 2.485 billion tokens available at launch from 10 billion total supply</li>
+    <li><strong>Controlled Distribution:</strong> Remaining 75.15% secured in locks, vests, and time-locked treasury</li>
+    <li><strong>Price Stability Focus:</strong> Limited initial circulation reduces volatility and protects early investors from dilution</li>
+  </ul>
+
+  <h3 class="text-2xl font-bold mt-8 mb-4 text-gray-800">✅ Why This Exceeds Meme Coin Standards</h3>
+  <p class="text-lg leading-relaxed">
+    Most meme coins launch with <strong>100% circulating supply</strong>, zero liquidity locks, and team wallets that can dump at any moment. NGAZ implements <strong>institutional-grade security measures</strong> typically seen in serious DeFi protocols:
+  </p>
+  <ul class="space-y-2 mt-4">
+    <li>✓ Multi-year liquidity commitment vs. typical 0-6 month locks</li>
+    <li>✓ Smart contract vesting vs. manual token releases</li>
+    <li>✓ Multisig protection vs. single EOA wallet control</li>
+    <li>✓ 75% supply secured vs. immediate full circulation</li>
+    <li>✓ 100% on-chain verification vs. trust-based promises</li>
+  </ul>
+
+  <div class="bg-blue-50 border-l-4 border-blue-600 p-6 mt-8 rounded-r-lg">
+    <p class="text-lg font-semibold text-blue-900 mb-2">🔍 Full On-Chain Verifiability</p>
+    <p class="text-gray-700">
+      Every security claim is verifiable on Basescan. Don't trust—verify. Check our liquidity locks, Sablier vesting streams, multisig configurations, and treasury time-locks yourself. Transparency isn't a marketing claim for NGAZ—it's our technical architecture.
+    </p>
+  </div>
+</div></div>
+      </div></div>
+      </div>
+
+  <!-- SQL Modal -->
+  <div id="sql-modal" onclick="utils.closeModalOnOverlay(event)">
+    <div class="sql-modal-content" onclick="event.stopPropagation()">
+      <div class="sql-modal-header">
+        <h2 style="margin: 0; font-size: 18px; font-weight: 600; color: var(--color-text-primary);">SQL Query</h2>
+        <button onclick="utils.closeSqlModal()" style="background: none; border: none; font-size: 24px; cursor: pointer; color: var(--color-text-muted); line-height: 1;">&times;</button>
+      </div>
+      <div class="sql-modal-body">
+        <div id="sql-queries-container"></div>
+      </div>
+      <div class="sql-modal-footer">
+        <button class="modal-btn" onclick="utils.closeSqlModal()">Close</button>
+        <button class="modal-btn modal-btn-primary" onclick="utils.copySqlQuery()">Copy SQL</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+(function() {
+  const data = queries.get('eb433f31-98b2-45da-8faa-1cf71b05d3b0');
+  const totalValue = window.sum(data.map(d => d.CURRENT_BALANCE));
+  document.getElementById('metric-1-value').textContent = totalValue.toLocaleString();
+})();
+</script>
+<script>
+(function() {
+  const data = queries.get('158cb86c-5b28-4a94-9ceb-c19841f3bd93');
+  
+  // Calculate total balance across all wallets
+  const totalBalance = window.sum(data.map(d => d.CURRENT_BALANCE || 0));
+  
+  // Calculate average balance per wallet
+  const avgBalance = window.avg(data.map(d => d.CURRENT_BALANCE || 0));
+  
+  // Format and display the average balance
+  document.getElementById('metric-2-value').textContent = avgBalance.toLocaleString(undefined, {
+    maximumFractionDigits: 0
+  });
+})();
+</script>
+<script>
+(function() {
+  const data = queries.get('dd8c2b9e-23cd-4d80-82d3-0bdad34a8de1');
+  
+  if (!data || data.length === 0) {
+    console.error('No data available for chart');
+    return;
+  }
+  
+  // Process data for time series
+  const processedData = data.map(d => {
+    return {
+      firstMintDate: d.FIRST_MINT_DATE ? new Date(d.FIRST_MINT_DATE).getTime() : null,
+      lastMintDate: d.LAST_MINT_DATE ? new Date(d.LAST_MINT_DATE).getTime() : null,
+      totalMinted: d.TOTAL_MINTED || 0,
+      totalBurned: d.TOTAL_BURNED || 0,
+      circulatingSupply: d.CIRCULATING_SUPPLY || 0,
+      totalMintEvents: d.TOTAL_MINT_EVENTS || 0
+    };
+  });
+  
+  // Create series data for circulating supply over time
+  const circulatingSupplySeries = [];
+  const totalMintedSeries = [];
+  const totalBurnedSeries = [];
+  
+  processedData.forEach(d => {
+    if (d.lastMintDate !== null) {
+      if (d.circulatingSupply !== 0) {
+        circulatingSupplySeries.push([d.lastMintDate, d.circulatingSupply]);
+      }
+      if (d.totalMinted !== 0) {
+        totalMintedSeries.push([d.lastMintDate, d.totalMinted]);
+      }
+      if (d.totalBurned !== 0) {
+        totalBurnedSeries.push([d.lastMintDate, d.totalBurned]);
+      }
+    }
+  });
+  
+  // Build series array dynamically based on available data
+  const series = [];
+  
+  if (circulatingSupplySeries.length > 0) {
+    series.push({
+      name: 'Circulating Supply',
+      data: circulatingSupplySeries,
+      color: CHART_COLORS[0]
+    });
+  }
+  
+  if (totalMintedSeries.length > 0) {
+    series.push({
+      name: 'Total Minted',
+      data: totalMintedSeries,
+      color: CHART_COLORS[1]
+    });
+  }
+  
+  if (totalBurnedSeries.length > 0) {
+    series.push({
+      name: 'Total Burned',
+      data: totalBurnedSeries,
+      color: CHART_COLORS[2]
+    });
+  }
+  
+  Highcharts.chart('chart-1', {
+    chart: {
+      type: 'line',
+      zooming: {
+        type: 'x'
+      }
+    },
+    title: {
+      text: 'Token Supply Time Series'
+    },
+    subtitle: {
+      text: 'Tracking minted, burned, and circulating supply over time'
+    },
+    xAxis: {
+      type: 'datetime',
+      title: {
+        text: 'Date'
+      }
+    },
+    yAxis: {
+      title: {
+        text: 'Token Amount'
+      }
+    },
+    tooltip: {
+      shared: true,
+      crosshairs: true,
+      xDateFormat: '%Y-%m-%d %H:%M:%S'
+    },
+    legend: {
+      enabled: true
+    },
+    plotOptions: {
+      line: {
+        marker: {
+          enabled: true,
+          radius: 4
+        },
+        lineWidth: 2
+      }
+    },
+    series: series
+  });
+})();
+</script>
+<script>
+(function() {
+  const data = queries.get('158cb86c-5b28-4a94-9ceb-c19841f3bd93');
+  
+  if (!data || data.length === 0) {
+    document.getElementById('chart-2').innerHTML = '<div class="flex items-center justify-center h-96 text-gray-500">No data available</div>';
+    return;
+  }
+  
+  // Define the allocation breakdown with proper labels
+  const allocations = [
+    {
+      name: 'Treasury Multisig (Combined)',
+      y: 40.00,
+      amount: 2680000001,
+      subtitle: 'Treasury (1.2B) + Liquidity (1.48B)',
+      color: CHART_COLORS[0]
+    },
+    {
+      name: 'Airdrop Fund',
+      y: 16.68,
+      amount: 1120000000,
+      color: CHART_COLORS[1]
+    },
+    {
+      name: 'Treasury Time-Lock',
+      y: 10.75,
+      amount: 720000000,
+      color: CHART_COLORS[2]
+    },
+    {
+      name: 'Marketing',
+      y: 10.53,
+      amount: 705000000,
+      color: CHART_COLORS[3]
+    },
+    {
+      name: 'Co-Founder Vesting',
+      y: 9.25,
+      amount: 620000000,
+      color: CHART_COLORS[4]
+    },
+    {
+      name: 'Community Distributed',
+      y: 5.55,
+      amount: 372000000,
+      color: CHART_COLORS[5]
+    },
+    {
+      name: 'Unaccounted',
+      y: 7.24,
+      amount: 485000000,
+      color: CHART_COLORS[6]
+    }
+  ];
+  
+  Highcharts.chart('chart-2', {
+    chart: {
+      type: 'pie',
+      height: 500
+    },
+    title: {
+      text: 'NGAZ Token Allocation Breakdown'
+    },
+    subtitle: {
+      text: 'Total Supply Distribution with Treasury Multisig Structure'
+    },
+    tooltip: {
+      pointFormat: '<b>{point.y:.2f}%</b><br/>Amount: <b>{point.amount:,.0f}</b> NGAZ<br/>{point.subtitle}',
+      style: {
+        fontSize: '12px'
+      }
+    },
+    plotOptions: {
+      pie: {
+        allowPointSelect: true,
+        cursor: 'pointer',
+        dataLabels: {
+          enabled: true,
+          format: '<b>{point.name}</b><br/>{point.y:.2f}%<br/>({point.amountShort})',
+          distance: 20,
+          style: {
+            fontSize: '11px',
+            textOutline: 'none'
+          }
+        },
+        showInLegend: true
+      }
+    },
+    legend: {
+      align: 'right',
+      verticalAlign: 'middle',
+      layout: 'vertical',
+      itemMarginTop: 5,
+      itemMarginBottom: 5
+    },
+    series: [{
+      name: 'Allocation',
+      colorByPoint: true,
+      data: allocations.map(item => ({
+        name: item.name,
+        y: item.y,
+        amount: item.amount,
+        amountShort: item.amount >= 1000000000 ? (item.amount / 1000000000).toFixed(2) + 'B' : (item.amount / 1000000).toFixed(0) + 'M',
+        subtitle: item.subtitle || '',
+        color: item.color,
+        sliced: item.name === 'Treasury Multisig (Combined)'
+      }))
+    }],
+    annotations: [{
+      labels: [{
+        point: {
+          x: 200,
+          y: 100,
+          xAxis: 0,
+          yAxis: 0
+        },
+        text: '<b>Treasury Breakdown:</b><br/>Treasury: 1.2B (17.91%)<br/>Liquidity: 1.48B (22.09%)',
+        backgroundColor: 'rgba(255, 255, 255, 0.95)',
+        borderColor: CHART_COLORS[0],
+        borderWidth: 2,
+        borderRadius: 5,
+        padding: 10,
+        style: {
+          fontSize: '11px'
+        }
+      }]
+    }],
+    credits: {
+      enabled: false
+    }
+  });
+})();
+</script>
+<script></script>
+<script></script>
+<script></script>
+</body>
+</html>
