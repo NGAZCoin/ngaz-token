@@ -5,15 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>$NGAZ Crew Pass Mint</title>
 
-  <!-- Thirdweb Browser SDK -->
-  <script src="https://unpkg.com/@thirdweb-dev/sdk@3.9.2/dist/browser-umd/sdk.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
+  <!-- Ethers just in case we want on-chain reads later -->
+  <script src="https://unpkg.com/ethers@5.7.2/dist/ethers.umd.min.js"></script>
 
   <style>
     body {
       background-color: #0b0c0e;
       color: white;
-      font-family: Arial, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
       margin: 0;
       padding: 0;
       display: flex;
@@ -24,49 +23,92 @@
 
     .container {
       max-width: 480px;
-      padding: 20px;
+      padding: 24px 20px 40px;
     }
 
     img.pass {
       width: 100%;
-      border-radius: 15px;
-      margin-top: 20px;
+      border-radius: 20px;
+      margin: 20px 0 16px;
       border: 2px solid #4B84FE;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.5);
     }
 
     h1 {
       font-size: 32px;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
       font-weight: 900;
     }
 
     .sub {
       font-size: 16px;
       color: #cfcfcf;
-      margin-bottom: 30px;
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+
+    .tagline {
+      font-size: 14px;
+      color: #7d8aa5;
+      margin-bottom: 20px;
     }
 
     button {
       width: 100%;
       padding: 14px;
-      font-size: 20px;
+      font-size: 18px;
       border: none;
-      color: black;
-      background-color: #4B84FE;
-      border-radius: 12px;
+      border-radius: 999px;
       cursor: pointer;
       font-weight: 700;
-      margin-top: 20px;
+      margin-top: 16px;
+      transition: all 0.15s ease-out;
+    }
+
+    #connectBtn {
+      color: #020308;
+      background: #4B84FE;
+      box-shadow: 0 8px 22px rgba(75,132,254,0.6);
+    }
+
+    #connectBtn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 26px rgba(75,132,254,0.75);
+    }
+
+    #mintBtn {
+      color: #ffffff;
+      background: #111827;
+      border: 1px solid #293548;
+    }
+
+    #mintBtn.enabled {
+      background: #10b981;
+      border-color: #10b981;
+      box-shadow: 0 8px 22px rgba(16,185,129,0.55);
+    }
+
+    #mintBtn.enabled:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 26px rgba(16,185,129,0.75);
     }
 
     button:disabled {
-      opacity: 0.4;
+      opacity: 0.45;
       cursor: not-allowed;
+      box-shadow: none;
+      transform: none;
     }
 
     .supply {
-      margin-top: 15px;
+      margin-top: 6px;
       color: #9fa9b7;
+      font-size: 14px;
+      min-height: 20px;
+    }
+
+    .error {
+      color: #fb7185;
     }
   </style>
 </head>
@@ -74,60 +116,143 @@
 <body>
   <div class="container">
     <h1>$NGAZ Crew Pass</h1>
-    <p class="sub">A free mint for early supporters.<br>Built on Base.</p>
+    <p class="sub">A free mint for early supporters.</p>
+    <p class="tagline">Built on Base. One pass per wallet.</p>
 
-    <img src="ngaz-crew-pass.jpg" class="pass" alt="NGAZ Crew Pass" />
+    <!-- Make sure this filename matches exactly what’s in the repo -->
+    <img src="NGAZ Crew Pass.jpg" class="pass" alt="NGAZ Crew Pass" />
 
-    <div id="supply" class="supply">Loading supply...</div>
+    <div id="supply" class="supply">Mint is live. Connect your wallet to mint.</div>
 
     <button id="connectBtn">Connect Wallet</button>
     <button id="mintBtn" disabled>Mint Pass</button>
   </div>
 
   <script>
-    const CONTRACT_ADDRESS = "0x5c2996B2414ef022B8d8CeE087b78b333c2125f8";
+    // ======= CONFIG =======
+    const CONTRACT_ADDRESS = "0x5c2996B2414ef022B8d8CeE087b78b333c2125f8"; // Crew Pass drop
+    const BASE_CHAIN_ID_HEX = "0x2105"; // Base mainnet chainId in hex (8453)
+    const THIRDWEB_CLAIM_URL = "PASTE_YOUR_THIRDWEB_TOKEN_PAGE_URL_HERE";
+    // Example: "https://thirdweb.com/base/0x5c2996B2414ef022B8d8CeE087b78b333c2125f8"
 
-    let provider, signer, sdk, contract;
+    const connectBtn = document.getElementById("connectBtn");
+    const mintBtn = document.getElementById("mintBtn");
+    const supplyDiv = document.getElementById("supply");
 
-    async function loadSupply() {
+    // --- Optional basic ABI just to *try* reading supply.
+    // If the contract doesn’t support these, we’ll just fall back to a generic message.
+    const nftDropAbi = [
+      "function totalSupply() view returns (uint256)",
+      "function maxTotalSupply() view returns (uint256)",
+      "function maxSupply() view returns (uint256)",         // some drops use this
+      "function totalClaimedSupply() view returns (uint256)" // thirdweb style
+    ];
+
+    async function tryLoadSupply(provider) {
       try {
-        const total = await contract.erc721.totalCount();
-        const claimed = await contract.erc721.totalClaimedSupply();
-        document.getElementById("supply").innerHTML = `Minted: ${claimed} / ${total}`;
-      } catch {
-        document.getElementById("supply").innerHTML = "Unable to load supply";
+        const contract = new ethers.Contract(CONTRACT_ADDRESS, nftDropAbi, provider);
+        let claimed = null;
+        let total = null;
+
+        try {
+          claimed = await contract.totalClaimedSupply();
+        } catch (_) {}
+
+        try {
+          total = await contract.maxTotalSupply();
+        } catch (_) {
+          try {
+            total = await contract.maxSupply();
+          } catch (_) {
+            try {
+              total = await contract.totalSupply();
+            } catch (_) {}
+          }
+        }
+
+        if (claimed !== null && total !== null) {
+          supplyDiv.textContent = `Minted: ${claimed.toString()} / ${total.toString()}`;
+        } else if (claimed !== null) {
+          supplyDiv.textContent = `Minted so far: ${claimed.toString()}`;
+        } else {
+          supplyDiv.textContent = "Mint is live. Supply details coming soon.";
+        }
+      } catch (err) {
+        console.error("Supply read error:", err);
+        supplyDiv.innerHTML = "<span class='error'>Mint is live. Unable to read supply.</span>";
       }
     }
 
-    document.getElementById("connectBtn").onclick = async () => {
-      provider = new ethers.providers.Web3Provider(window.ethereum);
-      await provider.send("eth_requestAccounts", []);
-      signer = provider.getSigner();
+    // --- Connect wallet + make sure we’re on Base ---
+    connectBtn.onclick = async () => {
+      if (!window.ethereum) {
+        alert("Please install MetaMask or Coinbase Wallet to mint your pass.");
+        return;
+      }
 
-      sdk = new thirdweb.ThirdwebSDK(signer, { chainId: 8453 });
-      contract = await sdk.getContract(CONTRACT_ADDRESS, "nft-drop");
+      try {
+        // Request accounts
+        const accounts = await window.ethereum.request({
+          method: "eth_requestAccounts"
+        });
 
-      document.getElementById("connectBtn").innerHTML = "Wallet Connected ✓";
-      document.getElementById("mintBtn").disabled = false;
+        // Try to switch to Base
+        try {
+          await window.ethereum.request({
+            method: "wallet_switchEthereumChain",
+            params: [{ chainId: BASE_CHAIN_ID_HEX }]
+          });
+        } catch (switchError) {
+          // If chain is not added, we can optionally suggest adding it
+          if (switchError.code === 4902) {
+            try {
+              await window.ethereum.request({
+                method: "wallet_addEthereumChain",
+                params: [{
+                  chainId: BASE_CHAIN_ID_HEX,
+                  chainName: "Base",
+                  rpcUrls: ["https://mainnet.base.org"],
+                  nativeCurrency: { name: "Ether", symbol: "ETH", decimals: 18 },
+                  blockExplorerUrls: ["https://basescan.org"]
+                }]
+              });
+            } catch (addErr) {
+              console.warn("User rejected adding Base:", addErr);
+            }
+          } else {
+            console.warn("Chain switch error:", switchError);
+          }
+        }
 
-      loadSupply();
+        connectBtn.textContent = "Wallet Connected ✓";
+        connectBtn.disabled = true;
+
+        // Enable Mint button
+        mintBtn.disabled = false;
+        mintBtn.classList.add("enabled");
+
+        // Try to load supply using ethers (optional)
+        try {
+          const provider = new ethers.providers.Web3Provider(window.ethereum);
+          await tryLoadSupply(provider);
+        } catch (e) {
+          console.error(e);
+        }
+
+      } catch (err) {
+        console.error("Wallet connection error:", err);
+        supplyDiv.innerHTML = "<span class='error'>Wallet connection failed. Please try again.</span>";
+      }
     };
 
-    document.getElementById("mintBtn").onclick = async () => {
-      try {
-        const btn = document.getElementById("mintBtn");
-        btn.innerHTML = "Minting...";
-        btn.disabled = true;
-
-        await contract.erc721.claim(1);
-
-        btn.innerHTML = "Minted ✓";
-        loadSupply();
-      } catch {
-        const btn = document.getElementById("mintBtn");
-        btn.innerHTML = "Mint Failed — Try Again";
-        btn.disabled = false;
+    // --- Mint button just deep-links to the official Thirdweb claim page ---
+    mintBtn.onclick = () => {
+      if (!THIRDWEB_CLAIM_URL || THIRDWEB_CLAIM_URL.startsWith("https://thirdweb.com/base/0x5c2996B2414ef022B8d8CeE087b78b333c2125f8")) {
+        alert("Mint URL not configured yet. Update THIRDWEB_CLAIM_URL in the HTML.");
+        return;
       }
+      // Open in a new tab so people can still see your landing page
+      window.open(THIRDWEB_CLAIM_URL, "_blank");
     };
   </script>
 </body>
