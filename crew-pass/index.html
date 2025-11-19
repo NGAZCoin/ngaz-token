@@ -247,12 +247,12 @@
 
     // --- Mint button just deep-links to the official Thirdweb claim page ---
     mintBtn.onclick = () => {
-      if (!THIRDWEB_CLAIM_URL || THIRDWEB_CLAIM_URL.startsWith("https://thirdweb.com/base/0x5c2996B2414ef022B8d8CeE087b78b333c2125f8")) {
-        alert("Mint URL not configured yet. Update THIRDWEB_CLAIM_URL in the HTML.");
-        return;
-      }
-      // Open in a new tab so people can still see your landing page
-      window.open(THIRDWEB_CLAIM_URL, "_blank");
+  if (!THIRDWEB_CLAIM_URL || THIRDWEB_CLAIM_URL === "") {
+    alert("Mint URL not configured yet. Update THIRDWEB_CLAIM_URL in the HTML.");
+    return;
+  }
+
+  window.open(THIRDWEB_CLAIM_URL, "_blank");
     };
   </script>
 </body>
