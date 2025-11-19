@@ -1,1 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>$NGAZ Crew Pass Mint</title>
+
+  <!-- Thirdweb SDK -->
+  <script src="https://unpkg.com/@thirdweb-dev/sdk@latest"></script>
+  <script src="https://unpkg.com/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+
+  <style>
+    body {
+      background-color: #0b0c0e;
+      color: white;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 480px;
+      padding: 20px;
+    }
+
+    img.pass {
+      width: 100%;
+      border-radius: 15px;
+      margin-top: 20px;
+      border: 2px solid #4B84FE;
+    }
+
+    h1 {
+      font-size: 32px;
+      margin-bottom: 10px;
+      font-weight: 900;
+    }
+
+    .sub {
+      font-size: 16px;
+      color: #cfcfcf;
+      margin-bottom: 30px;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      font-size: 20px;
+      border: none;
+      color: black;
+      background-color: #4B84FE;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 700;
+      margin-top: 20px;
+    }
+
+    button:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .supply {
+      margin-top: 15px;
+      color: #9fa9b7;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>$NGAZ Crew Pass</h1>
+    <p class="sub">A free mint for early supporters.<br>Built on Base.</p>
+
+    <img src="NGAZ_Crew_Pass_optimized.jpg" class="pass" alt="NGAZ Crew Pass" />
+
+    <div id="supply" class="supply">Loading supply...</div>
+
+    <button id="connectBtn">Connect Wallet</button>
+    <button id="mintBtn" disabled>Mint Pass</button>
+  </div>
+
+  <script>
+    const CONTRACT_ADDRESS = "YOUR_NFT_DROP_CONTRACT_ADDRESS_HERE";  
+    const NETWORK = "base";
+
+    let provider;
+    let signer;
+    let sdk;
+    let contract;
+
+    const connectBtn = document.getElementById("connectBtn");
+    const mintBtn = document.getElementById("mintBtn");
+    const supplyDiv = document.getElementById("supply");
+
+    async function loadSupply() {
+      try {
+        const total = await contract.totalSupply();
+        const claimed = await contract.totalClaimedSupply();
+        supplyDiv.innerHTML = `Minted: ${claimed} / ${total}`;
+      } catch (e) {
+        supplyDiv.innerHTML = "Unable to load supply";
+      }
+    }
+
+    connectBtn.onclick = async () => {
+      if (!window.ethereum) {
+        alert("Please install MetaMask or Coinbase Wallet.");
+        return;
+      }
+
+      provider = new ethers.providers.Web3Provider(window.ethereum);
+      await provider.send("eth_requestAccounts", []);
+      signer = provider.getSigner();
+
+      sdk = new thirdweb.ThirdwebSDK(signer, { readonlySettings: { chainId: 8453 }});
+      contract = await sdk.getContract(CONTRACT_ADDRESS, "nft-drop");
+
+      connectBtn.innerHTML = "Wallet Connected ✓";
+      mintBtn.disabled = false;
+
+      loadSupply();
+    };
+
+    mintBtn.onclick = async () => {
+      try {
+        mintBtn.innerHTML = "Minting...";
+        mintBtn.disabled = true;
+
+        await contract.claim(1);
+
+        mintBtn.innerHTML = "Minted ✓";
+        loadSupply();
+      } catch (error) {
+        console.error(error);
+        mintBtn.innerHTML = "Mint Failed — Try Again";
+        mintBtn.disabled = false;
+      }
+    };
+  </script>
+</body>
+</html>
 
