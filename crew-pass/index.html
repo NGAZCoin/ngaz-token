@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>$NGAZ Crew Pass Mint</title>
 
-  <!-- Thirdweb SDK -->
-  <script src="https://unpkg.com/@thirdweb-dev/sdk@latest"></script>
-  <script src="https://unpkg.com/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+  <!-- Thirdweb Browser SDK -->
+  <script src="https://unpkg.com/@thirdweb-dev/sdk@3.9.2/dist/browser-umd/sdk.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
 
   <style>
     body {
@@ -76,7 +76,7 @@
     <h1>$NGAZ Crew Pass</h1>
     <p class="sub">A free mint for early supporters.<br>Built on Base.</p>
 
-    <img src="NGAZ-Pass.jpg" class="pass" alt="NGAZ Crew Pass" />
+    <img src="ngaz-pass.jpg" class="pass" alt="NGAZ Crew Pass" />
 
     <div id="supply" class="supply">Loading supply...</div>
 
@@ -85,63 +85,50 @@
   </div>
 
   <script>
-    const CONTRACT_ADDRESS = "0x5c2996B2414ef022B8d8CeE087b78b333c2125f8";  
-    const NETWORK = "base";
+    const CONTRACT_ADDRESS = "0x5c2996B2414ef022B8d8CeE087b78b333c2125f8";
 
-    let provider;
-    let signer;
-    let sdk;
-    let contract;
-
-    const connectBtn = document.getElementById("connectBtn");
-    const mintBtn = document.getElementById("mintBtn");
-    const supplyDiv = document.getElementById("supply");
+    let provider, signer, sdk, contract;
 
     async function loadSupply() {
       try {
-        const total = await contract.totalSupply();
-        const claimed = await contract.totalClaimedSupply();
-        supplyDiv.innerHTML = `Minted: ${claimed} / ${total}`;
-      } catch (e) {
-        supplyDiv.innerHTML = "Unable to load supply";
+        const total = await contract.erc721.totalCount();
+        const claimed = await contract.erc721.totalClaimedSupply();
+        document.getElementById("supply").innerHTML = `Minted: ${claimed} / ${total}`;
+      } catch {
+        document.getElementById("supply").innerHTML = "Unable to load supply";
       }
     }
 
-    connectBtn.onclick = async () => {
-      if (!window.ethereum) {
-        alert("Please install MetaMask or Coinbase Wallet.");
-        return;
-      }
-
+    document.getElementById("connectBtn").onclick = async () => {
       provider = new ethers.providers.Web3Provider(window.ethereum);
       await provider.send("eth_requestAccounts", []);
       signer = provider.getSigner();
 
-      sdk = new thirdweb.ThirdwebSDK(signer, { readonlySettings: { chainId: 8453 }});
+      sdk = new thirdweb.ThirdwebSDK(signer, { chainId: 8453 });
       contract = await sdk.getContract(CONTRACT_ADDRESS, "nft-drop");
 
-      connectBtn.innerHTML = "Wallet Connected ✓";
-      mintBtn.disabled = false;
+      document.getElementById("connectBtn").innerHTML = "Wallet Connected ✓";
+      document.getElementById("mintBtn").disabled = false;
 
       loadSupply();
     };
 
-    mintBtn.onclick = async () => {
+    document.getElementById("mintBtn").onclick = async () => {
       try {
-        mintBtn.innerHTML = "Minting...";
-        mintBtn.disabled = true;
+        const btn = document.getElementById("mintBtn");
+        btn.innerHTML = "Minting...";
+        btn.disabled = true;
 
-        await contract.claim(1);
+        await contract.erc721.claim(1);
 
-        mintBtn.innerHTML = "Minted ✓";
+        btn.innerHTML = "Minted ✓";
         loadSupply();
-      } catch (error) {
-        console.error(error);
-        mintBtn.innerHTML = "Mint Failed — Try Again";
-        mintBtn.disabled = false;
+      } catch {
+        const btn = document.getElementById("mintBtn");
+        btn.innerHTML = "Mint Failed — Try Again";
+        btn.disabled = false;
       }
     };
   </script>
 </body>
 </html>
-
