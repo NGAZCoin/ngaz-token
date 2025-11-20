@@ -1,1 +1,20 @@
-
+{
+  "version": "1.0.0",
+  "name": "$NGAZ Crypto Bodega",
+  "description": "One stop shop for passes, tokens and the crew. Built on Base.",
+  "iconUrl": "https://ngazcoin.github.io/ngaz-token/bodega/ngaz-bodega.png",
+  "websiteUrl": "https://ngazcoin.github.io/ngaz-token/bodega/",
+  "publisher": {
+    "name": "NGAZ",
+    "address": "0x6216740F012629578Fd1B3D81d4C099351F9b09"
+  },
+  "platforms": [
+    "base"
+  ],
+  "baseBuilder": {
+    "ownerAddress": "0x6216740F012629578Fd1B3D81d4C099351F9b09"
+  },
+  "navigation": {
+    "homeUrl": "https://ngazcoin.github.io/ngaz-token/bodega/"
+  }
+}
