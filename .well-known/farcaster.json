@@ -1,32 +1,18 @@
 {
-  "version": "1",
+  "miniapp": {
+    "version": "1.0",
+    "name": "NGAZ Crypto Bodega",
+    "homeUrl": "https://ngazcoin.github.io/ngaz-token/bodega/",
+    "iconUrl": "https://ngazcoin.github.io/ngaz-token/bodega/icon.png",
+    "description": "Crypto marketplace powered by NGAZ token on Base",
+    "categories": ["marketplace", "defi"]
+  },
   "accountAssociation": {
     "header": "",
     "payload": "",
     "signature": ""
   },
   "baseBuilder": {
-    "ownerAddress": "0x6216740F012629578Fd13B0D184C099351F9b09"
-  },
-  "miniapp": {
-    "version": "1",
-    "name": "$NGAZ Crypto Bodega",
-    "homeUrl": "https://ngazcoin.github.io/ngaz-token/",
-    "iconUrl": "https://ngazcoin.github.io/ngaz-token/ngaz-bodega.png",
-    "splashImageUrl": "https://ngazcoin.github.io/ngaz-token/ngaz-bodega.png",
-    "splashBackgroundColor": "#000000",
-    "subtitle": "One stop shop for passes, tokens and the crew.",
-    "description": "One stop shop for passes, tokens and the crew. Built on Base.",
-    "screenshotUrls": [
-      "https://ngazcoin.github.io/ngaz-token/ngaz-bodega.png"
-    ],
-    "primaryCategory": "social",
-    "tags": ["ngaz", "bodega", "base", "miniapp"],
-    "heroImageUrl": "https://ngazcoin.github.io/ngaz-token/ngaz-bodega.png",
-    "tagline": "Grab your $NGAZ Crew Pass",
-    "ogTitle": "$NGAZ Crypto Bodega",
-    "ogDescription": "One stop shop for passes, tokens and the crew. Built on Base.",
-    "ogImageUrl": "https://ngazcoin.github.io/ngaz-token/ngaz-bodega.png",
-    "noindex": true
+    "ownerAddress": ""
   }
 }
