@@ -1,14 +1,11 @@
 {
-  "version": "1",
   "accountAssociation": {
     "header": "",
     "payload": "",
     "signature": ""
   },
   "baseBuilder": {
-    "allowedAddresses": [
-      "0x6216740F012629578Fd13B0D184C099351F9b09"
-    ]
+    "ownerAddress": "0x6216740F012629578Fd13B0D184C099351F9b09"
   },
   "miniapp": {
     "version": "1",
@@ -23,7 +20,7 @@
       "https://ngazcoin.github.io/ngaz-token/ngaz-bodega.png"
     ],
     "primaryCategory": "social",
-    "tags": ["NGAZ", "bodega", "base", "miniapp"],
+    "tags": ["ngaz", "bodega", "base", "miniapp"],
     "heroImageUrl": "https://ngazcoin.github.io/ngaz-token/ngaz-bodega.png",
     "tagline": "Grab your $NGAZ Crew Pass",
     "ogTitle": "$NGAZ Crypto Bodega",
@@ -32,4 +29,3 @@
     "noindex": true
   }
 }
-
