@@ -1,26 +1,23 @@
 {
   "version": "1",
+  "accountAssociation": {
+    "header": "PASTE_HEADER_FROM_ACCOUNT_TOOL",
+    "payload": "PASTE_PAYLOAD_FROM_ACCOUNT_TOOL",
+    "signature": "PASTE_SIGNATURE_FROM_ACCOUNT_TOOL"
+  },
   "miniapp": {
+    "id": "ngaz-crypto-bodega",
     "name": "$NGAZ Crypto Bodega",
-    "subtitle": "Passes, tokens and the crew.",
     "description": "One stop shop for passes, tokens and the crew. Built on Base.",
     "iconUrl": "https://ngazcoin.github.io/ngaz-token/ngaz-bodega.png",
-    "splashImageUrl": "https://ngazcoin.github.io/ngaz-token/ngaz-bodega.png",
-    "splashBackgroundColor": "#05060A",
     "homeUrl": "https://ngazcoin.github.io/ngaz-token/",
-    "primaryCategory": "finance",
-    "tags": ["crypto", "memecoin", "base", "community"],
-    "heroImageUrl": "https://ngazcoin.github.io/ngaz-token/ngaz-bodega.png",
-    "ogTitle": "$NGAZ Crypto Bodega",
-    "ogDescription": "Grab your Crew Pass, load up on $NGAZ and slide back into the community.",
-    "ogImageUrl": "https://ngazcoin.github.io/ngaz-token/ngaz-bodega.png"
+    "splashImageUrl": "https://ngazcoin.github.io/ngaz-token/ngaz-bodega.png",
+    "splashBackgroundColor": "#05060a",
+    "primaryCategory": "defi",
+    "tags": ["ngaz", "crypto", "community"]
   },
-  "publisher": {
-    "name": "NGAZ",
-    "address": "0x6216740F012629578Fd13B0D184C099351F9b09"
-  },
-  "platforms": ["base"],
   "baseBuilder": {
-    "ownerAddress": "0x6216740F012629578Fd13B0D184C099351F9b09"
+    "address": "0x6216740F012629578Fd13B0D184C099351F9b09"
   }
 }
+
