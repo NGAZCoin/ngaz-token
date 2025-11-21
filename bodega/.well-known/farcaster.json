@@ -1,7 +1,15 @@
-{
+{{
   "accountAssociation": {
     "header": "eyJmaWQiOjE0OTg4NTgsInR5cGUiOiJjdXN0b2R5Iiwia2V5IjoiMHg2ZTg1QTZhOWM3QzAwODNCOTk0MjZGMDYwMDM5MDJEZjY3ZjkxQWYzIn0",
     "payload": "eyJkb21haW4iOiJuZ2F6LXRva2VuLTE1M2I1aDhuYy1uZ2F6LXMtcHJvamVjdHMudmVyY2VsLmFwcCJ9",
     "signature": "dkT6E+3DiBtD+CWZ9rTNqhhTtfPIKPMS9iKstYO1BZEeMWqHhZPQjEwUAcfW31OsK1F7h3hgeLZzAuxadXtFURw="
+  },
+  "miniapp": {
+    "version": "1.0",
+    "name": "NGAZ Crypto Bodega",
+    "homeUrl": "https://ngaz-token-153b5h8nc-ngaz-s-projects.vercel.app/",
+    "iconUrl": "https://ngaz-token-153b5h8nc-ngaz-s-projects.vercel.app/icon.jpg",
+    "description": "Crypto marketplace powered by NGAZ token on Base",
+    "categories": ["marketplace", "defi"]
   }
 }
