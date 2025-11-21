@@ -3,7 +3,7 @@
     "version": "1.0",
     "name": "NGAZ Crypto Bodega",
     "homeUrl": "https://ngaz-token-cbac-ngaz-s-projects.vercel.app/",
-    "iconUrl": "https://ngaz-token-cbac-ngaz-s-projects.vercel.app/icon.png",
+    "iconUrl": "https://ngaz-token-cbac-ngaz-s-projects.vercel.app/icon.jpg",
     "description": "Crypto marketplace powered by NGAZ token on Base",
     "categories": ["marketplace", "defi"]
   },
