@@ -2,8 +2,8 @@
   "miniapp": {
     "version": "1.0",
     "name": "NGAZ Crypto Bodega",
-    "homeUrl": "https://ngazcoin.github.io/ngaz-token/bodega/",
-    "iconUrl": "https://ngazcoin.github.io/ngaz-token/bodega/icon.png",
+    "homeUrl": "https://ngaz-token-cbac-ngaz-s-projects.vercel.app/",
+    "iconUrl": "https://ngaz-token-cbac-ngaz-s-projects.vercel.app/icon.png",
     "description": "Crypto marketplace powered by NGAZ token on Base",
     "categories": ["marketplace", "defi"]
   },
