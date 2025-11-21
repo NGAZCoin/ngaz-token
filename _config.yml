@@ -1,9 +1,0 @@
-include:
-  - .well-known
-  - .well-known/farcaster.json
-
-defaults:
-  - scope:
-      path: ".well-known"
-    values:
-      sitemap: false
