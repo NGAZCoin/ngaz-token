@@ -1,25 +1,31 @@
 {
-  "version": "1.0.0",
-  "miniapp": {
-    "name": "$NGAZ Crypto Bodega",
-    "description": "One stop shop for passes, tokens and the crew. Built on Base.",
-    "iconUrl": "https://ngazcoin.github.io/ngaz-token/ngaz-bodega.png",
-    "homeUrl": "https://ngazcoin.github.io/ngaz-token/"
-  },
-  "publisher": {
-    "name": "NGAZ",
-    "address": "0x6216740F012629578Fd13B0D184C099351F9b09"
-  },
-  "platforms": ["base"],
-  "navigation": {
-    "homeUrl": "https://ngazcoin.github.io/ngaz-token/"
-  },
   "accountAssociation": {
-    "accountId": "0x6216740F012629578Fd13B0D184C099351F9b09",
-    "signature": "0x6216740F012629578Fd1B3D81Bd4C099351F9b09"
+    "header": "PASTE_HEADER_FROM_BASE_BUILD",
+    "payload": "PASTE_PAYLOAD_FROM_BASE_BUILD",
+    "signature": "PASTE_SIGNATURE_FROM_BASE_BUILD"
   },
   "baseBuilder": {
     "ownerAddress": "0x6216740F012629578Fd13B0D184C099351F9b09"
-    "signature": "0x6216740F012629578Fd1B3D81Bd4C099351F9b09"
+  },
+  "miniapp": {
+    "version": "1",
+    "name": "$NGAZ Crypto Bodega",
+    "subtitle": "No Gimmicks. All Zap.",
+    "description": "One stop shop for passes, tokens and the crew. Built on Base.",
+    "homeUrl": "https://ngazcoin.github.io/ngaz-token/bodega/",
+    "iconUrl": "https://ngazcoin.github.io/ngaz-token/ngaz-bodega.png",
+    "splashImageUrl": "https://ngazcoin.github.io/ngaz-token/ngaz-bodega.png",
+    "splashBackgroundColor": "#05060a",
+    "primaryCategory": "finance",
+    "tags": ["ngaz", "bodega", "meme", "community", "base"],
+    "screenshotUrls": [
+      "https://ngazcoin.github.io/ngaz-token/ngaz-bodega.png"
+    ],
+    "heroImageUrl": "https://ngazcoin.github.io/ngaz-token/ngaz-bodega.png",
+    "tagline": "Grab a piece of the block.",
+    "ogTitle": "$NGAZ Crypto Bodega",
+    "ogDescription": "Grab your Crew Pass, load up on $NGAZ and slide back into Base City.",
+    "ogImageUrl": "https://ngazcoin.github.io/ngaz-token/ngaz-bodega.png",
+    "noindex": true
   }
 }
