@@ -2,4 +2,5 @@
   "buildCommand": null,
   "outputDirectory": "bodega",
   "framework": null
+  "installCommand": "echo 'No install needed'"
 }
