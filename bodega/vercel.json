@@ -1,7 +1,3 @@
-cd bodega
-
-# Update vercel.json with CORS headers
-cat > vercel.json << 'EOF'
 {
   "buildCommand": null,
   "outputDirectory": ".",
@@ -23,8 +19,3 @@ cat > vercel.json << 'EOF'
     }
   ]
 }
-EOF
-
-git add vercel.json
-git commit -m "Add CORS headers for manifest"
-git push
