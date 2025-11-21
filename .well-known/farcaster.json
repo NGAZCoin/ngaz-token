@@ -1,23 +1,26 @@
 {
-  "version": "1",
-  "accountAssociation": {
-    "header": "PASTE_HEADER_FROM_ACCOUNT_TOOL",
-    "payload": "PASTE_PAYLOAD_FROM_ACCOUNT_TOOL",
-    "signature": "PASTE_SIGNATURE_FROM_ACCOUNT_TOOL"
-  },
+  "version": "1.0.0",
   "miniapp": {
-    "id": "ngaz-crypto-bodega",
     "name": "$NGAZ Crypto Bodega",
     "description": "One stop shop for passes, tokens and the crew. Built on Base.",
     "iconUrl": "https://ngazcoin.github.io/ngaz-token/ngaz-bodega.png",
-    "homeUrl": "https://ngazcoin.github.io/ngaz-token/",
-    "splashImageUrl": "https://ngazcoin.github.io/ngaz-token/ngaz-bodega.png",
-    "splashBackgroundColor": "#05060a",
-    "primaryCategory": "defi",
-    "tags": ["ngaz", "crypto", "community"]
+    "homeUrl": "https://ngazcoin.github.io/ngaz-token/"
+  },
+  "publisher": {
+    "name": "NGAZ",
+    "address": "0x6216740F012629578Fd13B0D184C099351F9b09"
+  },
+  "platforms": ["base"],
+  "navigation": {
+    "homeUrl": "https://ngazcoin.github.io/ngaz-token/"
+  },
+  "accountAssociation": {
+    "header": "",
+    "payload": "",
+    "signature": ""
   },
   "baseBuilder": {
-    "address": "0x6216740F012629578Fd13B0D184C099351F9b09"
+    "ownerAddress": "0x6216740F012629578Fd13B0D184C099351F9b09"
   }
 }
 
