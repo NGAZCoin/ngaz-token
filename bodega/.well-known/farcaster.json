@@ -2,17 +2,18 @@
   "miniapp": {
     "version": "1.0",
     "name": "NGAZ Crypto Bodega",
-    "homeUrl": "https://ngaz-token-cbac-ngaz-s-projects.vercel.app/",
-    "iconUrl": "https://ngaz-token-cbac-ngaz-s-projects.vercel.app/icon.jpg",
+    "homeUrl": "https://ngaz-token-cbac-1-projects.vercel.app/",
+    "iconUrl": "https://ngaz-token-cbac-1-projects.vercel.app/icon.jpg",
     "description": "Crypto marketplace powered by NGAZ token on Base",
     "categories": ["marketplace", "defi"]
   },
   "accountAssociation": {
-    "header": "",
-    "payload": "",
-    "signature": ""
+    "header": "eyJmaWQiOjE0NTg4LCJ0eXBlIjoiY3VzdG9keSIsImtleSI6IjB4NzYwQjA0NDc5NjM4MTExNzNmRjg3YDPBYzA5OEJBQ0YxNzNCYkU0OCJ9",
+    "payload": "eyJkb21haW4iOiJuZ2F6LXRva2VuLTE1M2I1aDhuYy1uZ2F6LXMtcHJvamVjdHMudmVyY2VsLmFwcCJ9",
+    "signature": "PASTE_THE_FULL_SIGNATURE_HERE"
   },
-  "baseBuilder": {
-    "ownerAddress": "0x6216740F012629578Fd1B3D81Bd4C099351F9b09"
+  "socialLinks": {
+    "ownerAddress": "0x82874fdd73126507dfd18B81D64c499351FBd80F"
   }
 }
+
