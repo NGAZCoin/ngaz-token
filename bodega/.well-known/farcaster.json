@@ -10,7 +10,7 @@
   "accountAssociation": {
     "header": "eyJmaWQiOjE0NTg4LCJ0eXBlIjoiY3VzdG9keSIsImtleSI6IjB4NzYwQjA0NDc5NjM4MTExNzNmRjg3YDPBYzA5OEJBQ0YxNzNCYkU0OCJ9",
     "payload": "eyJkb21haW4iOiJuZ2F6LXRva2VuLTE1M2I1aDhuYy1uZ2F6LXMtcHJvamVjdHMudmVyY2VsLmFwcCJ9",
-    "signature": "PASTE_THE_FULL_SIGNATURE_HERE"
+    "signature": "dkT6E+3DiBtD+CWZ9rTNqhhTtfPIKPMS9iKstYO1BZEeMWqHhZPQjEwUAcfW31OsK1F7h3hgeLZzAuxadXtFURw="
   },
   "socialLinks": {
     "ownerAddress": "0x82874fdd73126507dfd18B81D64c499351FBd80F"
