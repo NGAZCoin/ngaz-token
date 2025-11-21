@@ -1,6 +1,30 @@
+cd bodega
+
+# Update vercel.json with CORS headers
+cat > vercel.json << 'EOF'
 {
   "buildCommand": null,
-  "outputDirectory": "bodega",
-  "framework": null
-  "installCommand": "echo 'No install needed'"
+  "outputDirectory": ".",
+  "framework": null,
+  "installCommand": "echo 'No install needed'",
+  "headers": [
+    {
+      "source": "/.well-known/farcaster.json",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        },
+        {
+          "key": "Content-Type",
+          "value": "application/json"
+        }
+      ]
+    }
+  ]
 }
+EOF
+
+git add vercel.json
+git commit -m "Add CORS headers for manifest"
+git push
